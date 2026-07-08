@@ -1,642 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Engineering — Edward Kabuko</title>
-<link rel="preconnect" href="https://fonts.googleapis.com1A">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-/* ===================================================================
-   DESIGN TOKENS
-   Concept: "Blueprint & Darkroom" — engineering drafting meets film
-   photography. Cyanotype blue = engineering. Darkroom amber = photo.
-   Frame/revision numbers (F.01, R.02) are the shared visual language
-   between drawing revisions and film frame counters.
-=================================================================== */
-:root{
-  --ink:#F3F3F6;
-  --ink-soft:#B7B7C2;
-  --muted:#84848F;
-  --paper:#08080B;
-  --paper-2:#131318;
-  --paper-3:#1C1C23;
-  --white:#141419;
-  --line:rgba(255,255,255,0.11);
-  --line-soft:rgba(255,255,255,0.06);
-  --blue:#8B5CF6;
-  --blue-deep:#B9A2FF;
-  --blue-tint:rgba(139,92,246,0.14);
-  --amber:#FF7A45;
-  --amber-deep:#FFA36B;
-  --amber-tint:rgba(255,122,69,0.14);
-
-  --font-display:'Space Grotesk', sans-serif;
-  --font-body:'Inter', -apple-system, sans-serif;
-  --font-mono:'JetBrains Mono', monospace;
-
-  --max:1180px;
-  --gap:2rem;
-}
-
-*{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{
-  margin:0;
-  background:var(--paper);
-  color:var(--ink);
-  font-family:var(--font-body);
-  font-size:17px;
-  line-height:1.65;
-  -webkit-font-smoothing:antialiased;
-}
-img{max-width:100%;display:block;}
-a{color:inherit;text-decoration:none;}
-ul{list-style:none;margin:0;padding:0;}
-button{font-family:inherit;cursor:pointer;}
-
-.container{max-width:var(--max);margin:0 auto;padding:0 6vw;}
-
-/* subtle blueprint grid watermark behind everything */
-.grid-bg{
-  position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background-image:
-    linear-gradient(var(--line-soft) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
-  background-size:64px 64px;
-  opacity:0.35;
-  mask-image:linear-gradient(to bottom, black, transparent 70%);
-}
-
-/* ===================== TYPE ===================== */
-h1,h2,h3,h4{
-  font-family:var(--font-display);
-  font-weight:500;
-  letter-spacing:-0.01em;
-  margin:0 0 0.6em;
-  color:var(--ink);
-}
-h1{font-size:clamp(2.6rem, 6vw, 5rem); line-height:1.02; letter-spacing:-0.02em;}
-h2{font-size:clamp(1.7rem, 3.4vw, 2.6rem); line-height:1.1;}
-h3{font-size:1.3rem;}
-p{margin:0 0 1.1em;}
-.eyebrow{
-  font-family:var(--font-mono);
-  font-size:0.78rem;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  color:var(--muted);
-  display:flex;align-items:center;gap:0.6em;
-  margin-bottom:0.9em;
-}
-.eyebrow::before{content:"";width:22px;height:1px;background:var(--line);display:inline-block;}
-.frame-tag{
-  font-family:var(--font-mono);
-  font-size:0.72rem;
-  color:var(--muted);
-  letter-spacing:0.04em;
-}
-.lede{font-size:1.2rem; color:var(--ink-soft); max-width:640px;}
-
-/* ===================== NAV ===================== */
-.site-nav{
-  position:sticky; top:0; z-index:50;
-  background:rgba(8,8,11,0.72);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line);
-}
-.site-nav .container{
-  display:flex; align-items:center; justify-content:space-between;
-  height:76px;
-}
-.brand{
-  font-family:var(--font-mono);
-  font-size:1rem; font-weight:500; letter-spacing:0.02em;
-  display:flex; align-items:center; gap:0.5em;
-}
-.brand .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);display:inline-block;}
-.nav-links{display:flex; gap:2.1rem; align-items:center;}
-.nav-links a{
-  font-family:var(--font-mono); font-size:0.82rem; letter-spacing:0.03em;
-  color:var(--ink-soft); position:relative; padding:0.3em 0;
-}
-.nav-links a.active, .nav-links a:hover{color:var(--ink);}
-.nav-links a.active::after{
-  content:""; position:absolute; left:0; right:0; bottom:-2px; height:2px; background:var(--blue);
-}
-.nav-cta{
-  font-family:var(--font-mono); font-size:0.78rem;
-  border:1px solid var(--ink); padding:0.55em 1.1em; border-radius:2px;
-  transition:background .18s, color .18s;
-}
-.nav-cta:hover{background:var(--ink); color:var(--white);}
-.nav-toggle{display:none; background:none; border:none;}
-
-/* ===================== BUTTONS ===================== */
-.btn{
-  display:inline-flex; align-items:center; gap:0.5em;
-  font-family:var(--font-mono); font-size:0.82rem; letter-spacing:0.02em;
-  padding:0.85em 1.5em; border-radius:2px; border:1px solid var(--ink);
-  transition:all .18s ease;
-}
-.btn-primary{
-  background:linear-gradient(100deg, var(--blue) 0%, #B27CFF 55%, var(--amber) 100%);
-  color:#0A0A0D; border-color:transparent; font-weight:500;
-}
-.btn-primary:hover{filter:brightness(1.1);}
-.btn-ghost{background:transparent; color:var(--ink);}
-.btn-ghost:hover{background:var(--ink); color:var(--white);}
-.btn-blue{border-color:var(--blue); color:var(--blue);}
-.btn-blue:hover{background:var(--blue); color:var(--white);}
-.btn-amber{border-color:var(--amber); color:var(--amber-deep);}
-.btn-amber:hover{background:var(--amber); color:var(--white); border-color:var(--amber);}
-
-/* ===================== SECTIONS ===================== */
-section{padding:6.5rem 0;}
-section.tight{padding:4rem 0;}
-.section-head{
-  display:flex; justify-content:space-between; align-items:flex-end;
-  gap:2rem; margin-bottom:3rem; flex-wrap:wrap;
-}
-hr.rule{border:none; border-top:1px solid var(--line); margin:0;}
-
-/* ===================== HERO ===================== */
-.hero{padding-top:4.5rem; padding-bottom:5rem;}
-.hero-grid{
-  display:grid; grid-template-columns:1.3fr 1fr; gap:4rem; align-items:end;
-}
-.hero-visual{
-  aspect-ratio:4/5; border:1px solid var(--line);
-  position:relative; overflow:hidden; background:var(--paper-2);
-}
-.hero-actions{display:flex; gap:1rem; margin-top:2.2rem; flex-wrap:wrap;}
-.hero-meta{
-  display:flex; flex-direction:column; gap:1.4rem; padding-bottom:0.5rem;
-}
-.hero-meta .stat{border-top:1px solid var(--line); padding-top:0.8rem;}
-.hero-meta .stat b{display:block; font-family:var(--font-display); font-size:1.6rem;}
-.hero-meta .stat span{font-family:var(--font-mono); font-size:0.75rem; color:var(--muted);}
-
-/* ===================== SPLIT TEASERS (home) ===================== */
-.teasers{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line);}
-.teaser{
-  background:var(--paper); padding:2.6rem 2.2rem; position:relative;
-  transition:background .2s;
-  min-height:280px; display:flex; flex-direction:column; justify-content:space-between;
-}
-.teaser:hover{background:var(--paper-2);}
-.teaser .num{font-family:var(--font-mono); color:var(--muted); font-size:0.8rem;}
-.teaser h3{margin-top:1rem;}
-.teaser .tag{
-  font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.05em;
-  text-transform:uppercase; padding:0.3em 0.7em; border:1px solid var(--line);
-  display:inline-block; margin-top:1.2rem; width:fit-content;
-}
-.teaser.eng .tag{border-color:var(--blue); color:var(--blue-deep);}
-.teaser.photo .tag{border-color:var(--amber); color:var(--amber-deep);}
-.teaser.blog .tag{border-color:var(--ink-soft); color:var(--ink-soft);}
-.teaser .arrow{font-family:var(--font-mono); font-size:1.3rem; align-self:flex-end;}
-
-/* ===================== FEATURED STRIP ===================== */
-.featured-strip{display:grid; grid-template-columns:repeat(4,1fr); gap:1.4rem;}
-.feat-card{border:1px solid var(--line); background:var(--white);}
-.feat-thumb{aspect-ratio:4/3; background:var(--paper-2); position:relative; overflow:hidden;}
-.feat-card .feat-body{padding:1.1rem 1.2rem;}
-.feat-card h4{font-size:0.98rem; margin:0.3em 0 0.2em;}
-.feat-card .frame-tag{display:block;}
-
-/* ===================== FOOTER ===================== */
-footer{border-top:1px solid var(--line); padding:3.4rem 0 2.2rem; margin-top:4rem;}
-.foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:2rem; margin-bottom:2.4rem;}
-.foot-grid h4{font-family:var(--font-mono); font-size:0.78rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); margin-bottom:1rem;}
-.foot-grid a{display:block; padding:0.3em 0; font-size:0.92rem; color:var(--ink-soft);}
-.foot-grid a:hover{color:var(--ink);}
-.foot-bottom{
-  display:flex; justify-content:space-between; align-items:center;
-  padding-top:1.6rem; border-top:1px solid var(--line);
-  font-family:var(--font-mono); font-size:0.75rem; color:var(--muted);
-  flex-wrap:wrap; gap:0.8rem;
-}
-
-/* ===================== PLACEHOLDER GRAPHIC (svg photo/thumbs) ===================== */
-.ph{width:100%; height:100%; display:block;}
-.hatch{
-  background-image: repeating-linear-gradient(45deg, var(--line-soft) 0, var(--line-soft) 1px, transparent 1px, transparent 13px);
-}
-.ph-note{
-  position:absolute; bottom:0.6rem; right:0.7rem;
-  font-family:var(--font-mono); font-size:0.62rem; color:var(--muted);
-  background:var(--paper); padding:0.15em 0.5em; border:1px solid var(--line);
-}
-
-/* ===================== PROJECT / GALLERY GRID ===================== */
-.filter-bar{display:flex; gap:0.7rem; flex-wrap:wrap; margin-bottom:2.6rem;}
-.filter-chip{
-  font-family:var(--font-mono); font-size:0.78rem; padding:0.5em 1.1em;
-  border:1px solid var(--line); border-radius:20px; color:var(--ink-soft);
-  background:transparent; transition:all .15s;
-}
-.filter-chip.active, .filter-chip:hover{background:var(--ink); color:var(--white); border-color:var(--ink);}
-
-.project-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem;}
-.project-card{border:1px solid var(--line); background:var(--white); overflow:hidden;}
-.project-thumb{aspect-ratio:16/11; background:var(--paper-2); position:relative;}
-.project-info{padding:1.3rem 1.4rem 1.6rem;}
-.project-info .frame-tag{margin-bottom:0.5rem; display:block;}
-.stack-list{display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.9rem;}
-.stack-pill{
-  font-family:var(--font-mono); font-size:0.68rem; padding:0.25em 0.6em;
-  background:var(--blue-tint); color:var(--blue-deep); border-radius:2px;
-}
-
-.masonry{columns:4 220px; column-gap:1rem;}
-.masonry .m-item{break-inside:avoid; margin-bottom:1rem; border:1px solid var(--line); background:var(--paper-2); position:relative; cursor:pointer;}
-.masonry .m-item .cap{
-  position:absolute; left:0; right:0; bottom:0; padding:0.6em 0.8em;
-  background:linear-gradient(to top, rgba(23,27,29,0.72), transparent);
-  color:var(--white); font-family:var(--font-mono); font-size:0.7rem; opacity:0; transition:opacity .2s;
-}
-.masonry .m-item:hover .cap{opacity:1;}
-
-/* lightbox */
-.lightbox{
-  position:fixed; inset:0; background:rgba(2,2,4,0.94); z-index:100;
-  display:none; align-items:center; justify-content:center; padding:4vh 4vw;
-}
-.lightbox.open{display:flex;}
-.lightbox-inner{max-width:900px; width:100%; color:var(--ink);}
-.lightbox-frame{aspect-ratio:3/2; background:var(--paper-2); margin-bottom:1rem;}
-.lightbox-close{position:absolute; top:2rem; right:3rem; color:var(--ink); font-family:var(--font-mono); background:none; border:1px solid rgba(255,255,255,0.25); padding:0.5em 1em;}
-
-/* ===================== BLOG ===================== */
-.blog-layout{display:grid; grid-template-columns:2fr 1fr; gap:3rem;}
-.post-row{
-  display:grid; grid-template-columns:180px 1fr; gap:1.6rem;
-  padding:1.8rem 0; border-top:1px solid var(--line);
-}
-.post-row:last-child{border-bottom:1px solid var(--line);}
-.post-thumb{aspect-ratio:4/3; background:var(--paper-2);}
-.post-tag{
-  font-family:var(--font-mono); font-size:0.68rem; text-transform:uppercase;
-  color:var(--blue-deep); letter-spacing:0.05em;
-}
-.post-row h3{margin:0.4em 0 0.4em; font-size:1.25rem;}
-.post-meta{font-family:var(--font-mono); font-size:0.75rem; color:var(--muted);}
-.sidebar-card{border:1px solid var(--line); padding:1.6rem; margin-bottom:1.6rem; background:var(--white);}
-.sidebar-card h4{font-size:0.95rem; margin-bottom:0.6rem;}
-.sidebar-card p{font-size:0.9rem; color:var(--ink-soft); margin-bottom:1rem;}
-.tag-cloud{display:flex; flex-wrap:wrap; gap:0.5rem;}
-.tag-cloud span{
-  font-family:var(--font-mono); font-size:0.72rem; padding:0.35em 0.7em;
-  background:var(--paper-2); border-radius:2px; color:var(--ink-soft);
-}
-.field{
-  width:100%; padding:0.75em 0.9em; border:1px solid var(--line); background:var(--paper-2);
-  font-family:var(--font-body); font-size:0.92rem; margin-bottom:0.8rem; border-radius:2px;
-  color:var(--ink);
-}
-
-/* article */
-.article-head{max-width:740px; margin:0 auto 3rem;}
-.article-body{max-width:740px; margin:0 auto; font-size:1.08rem;}
-.article-body h2{margin-top:1.6em;}
-.article-body p{margin-bottom:1.3em;}
-.article-body blockquote{
-  font-family:var(--font-display); font-size:1.3rem; border-left:2px solid var(--amber);
-  padding-left:1.4rem; margin:2rem 0; color:var(--ink-soft);
-}
-.article-cover{aspect-ratio:16/8; background:var(--paper-2); max-width:920px; margin:0 auto 3rem;}
-.promo-box{
-  max-width:740px; margin:2.5rem auto; border:1px solid var(--amber); background:var(--amber-tint);
-  padding:1.6rem 1.8rem; display:flex; justify-content:space-between; align-items:center; gap:1.5rem; flex-wrap:wrap;
-}
-
-/* ===================== ABOUT ===================== */
-.split{display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start;}
-.timeline{border-left:1px solid var(--line); padding-left:2rem; display:flex; flex-direction:column; gap:2.2rem;}
-.timeline .item{position:relative;}
-.timeline .item::before{
-  content:""; position:absolute; left:-2.05rem; top:0.35rem; width:9px; height:9px; border-radius:50%; background:var(--ink);
-}
-.timeline .item.photo::before{background:var(--amber);}
-.timeline .item.eng::before{background:var(--blue);}
-.timeline .item .frame-tag{margin-bottom:0.3rem; display:block;}
-.skills-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:2rem;}
-.skill-block h4{font-family:var(--font-mono); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); margin-bottom:0.8rem;}
-.skill-bar{height:4px; background:var(--paper-3); margin-bottom:1rem; position:relative;}
-.skill-bar i{position:absolute; left:0; top:0; bottom:0; background:var(--blue); display:block;}
-.skill-row{font-size:0.88rem; display:flex; justify-content:space-between; margin-bottom:0.3rem;}
-
-/* ===================== CASE STUDY ===================== */
-.cs-meta-bar{display:flex; gap:2.5rem; flex-wrap:wrap; padding:1.6rem 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin-bottom:3rem;}
-.cs-meta-bar div span{display:block; font-family:var(--font-mono); font-size:0.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.3rem;}
-.cs-gallery{display:grid; grid-template-columns:2fr 1fr; gap:1rem; margin:2.5rem 0;}
-.cs-gallery .tall{grid-row:span 2;}
-.cs-img{background:var(--paper-2); border:1px solid var(--line); aspect-ratio:4/3;}
-
-/* ===================== CONTACT ===================== */
-.contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:4rem;}
-.contact-form .field, .contact-form textarea{width:100%;}
-.contact-form textarea{padding:0.9em; border:1px solid var(--line); background:var(--paper-2); font-family:var(--font-body); border-radius:2px; min-height:140px; color:var(--ink);}
-.contact-form label{font-family:var(--font-mono); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--muted); display:block; margin-bottom:0.4rem;}
-.contact-form .fgroup{margin-bottom:1.3rem;}
-
-/* ===================== RESPONSIVE ===================== */
-@media (max-width:980px){
-  .hero-grid, .split, .contact-grid, .blog-layout{grid-template-columns:1fr;}
-  .teasers{grid-template-columns:1fr;}
-  .featured-strip{grid-template-columns:repeat(2,1fr);}
-  .project-grid{grid-template-columns:repeat(2,1fr);}
-  .foot-grid{grid-template-columns:1fr 1fr;}
-  .masonry{columns:2;}
-  .cs-gallery{grid-template-columns:1fr;}
-  .skills-grid{grid-template-columns:1fr;}
-}
-@media (max-width:640px){
-  .nav-links{
-    position:fixed; top:76px; left:0; right:0; background:var(--paper);
-    flex-direction:column; align-items:flex-start; padding:1.5rem 6vw;
-    border-bottom:1px solid var(--line); display:none; gap:1.2rem;
-  }
-  .nav-links.open{display:flex;}
-  .nav-cta{display:none;}
-  .nav-toggle{display:block;}
-  .featured-strip{grid-template-columns:1fr;}
-  .project-grid{grid-template-columns:1fr;}
-  .foot-grid{grid-template-columns:1fr 1fr;}
-  .post-row{grid-template-columns:1fr;}
-  .masonry{columns:1;}
-}
-
-/* reduced motion */
-@media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto;}
-  *{transition:none !important; animation:none !important;}
-}
-
-/* focus visibility */
-a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
-  outline:2px solid var(--blue); outline-offset:2px;
-}
-
-/* ===================== GLOW / GRADIENT SYSTEM ===================== */
-.glow-field{
-  position:fixed; inset:0; z-index:-2; pointer-events:none; overflow:hidden;
-}
-.glow{
-  position:absolute; border-radius:50%; filter:blur(90px); pointer-events:none;
-}
-.glow-a{ width:640px; height:640px; top:-220px; left:-160px; background:radial-gradient(circle, rgba(139,92,246,0.32), transparent 70%); }
-.glow-b{ width:560px; height:560px; top:-100px; right:-220px; background:radial-gradient(circle, rgba(255,122,69,0.22), transparent 70%); }
-
-.grad{
-  background:linear-gradient(100deg, var(--blue) 0%, #C9A6FF 45%, var(--amber) 100%);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-}
-.grad-underline{
-  text-decoration:none; border-bottom:2px solid transparent;
-  border-image:linear-gradient(90deg, var(--blue), var(--amber)) 1;
-}
-
-/* subtle noise-free vignette so pure black doesn't look flat */
-body::before{
-  content:""; position:fixed; inset:0; z-index:-3; pointer-events:none;
-  background:radial-gradient(ellipse at 50% -10%, rgba(139,92,246,0.10), transparent 55%);
-}
-
-/* glowing border treatment for elevated cards on hover */
-.feat-card, .project-card, .sidebar-card, .m-item{
-  transition:border-color .2s, box-shadow .2s;
-}
-.feat-card:hover, .project-card:hover{
-  border-color:rgba(139,92,246,0.5);
-  box-shadow:0 0 0 1px rgba(139,92,246,0.15), 0 12px 40px -12px rgba(139,92,246,0.25);
-}
-.teaser.photo:hover{ box-shadow: inset 0 0 0 1px rgba(255,122,69,0.4); }
-.teaser.eng:hover{ box-shadow: inset 0 0 0 1px rgba(139,92,246,0.4); }
-
-.eyebrow::before{background:linear-gradient(90deg, var(--blue), var(--amber));}
-.brand .dot{background:linear-gradient(135deg, var(--blue), var(--amber)); box-shadow:0 0 8px rgba(139,92,246,0.7);}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engineering — Edward Kabuko</title>
+  <!-- Link to your CSS stylesheet here -->
 </head>
 <body>
-<div class="grid-bg"></div>
-<div class="glow-field"><div class="glow glow-a"></div><div class="glow glow-b"></div></div>
 
-<nav class="site-nav">
-  <div class="container">
-    <a href="index.html" class="brand"><span class="dot"></span>E. Edwards</a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="engineering.html" class="active">Engineering</a></li>
-      <li><a href="photography.html">Photography</a></li>
-      <li><a href="blog.html">Blog</a></li>
-    </ul>
-    <a href="contact.html" class="nav-cta">Let's talk</a>
-    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
-  </div>
-</nav>
+  <!-- Navigation header -->
+  <header>
+    <a href="index.html">E. Edwards</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="engineering.html">Engineering</a>
+      <a href="photography.html">Photography</a>
+      <a href="blog.html">Blog</a>
+    </nav>
+    <a href="contact.html">Let's talk</a>
+  </header>
 
-<header class="hero" style="padding-bottom:2.5rem;">
-  <div class="container">
-    <div class="eyebrow">R.00 — engineering</div>
-    <h1 style="max-width:760px;">Case studies from building scope  <span class="grad">things that have to actually work</span>.</h1>
-    <p class="lede">Research, precision design, and structure development — filtered by discipline below. Every project links to a full write-up: the constraint, the approach, and what shipped.</p>
-  </div>
-</header>
+  <!-- Main Content Body -->
+  <section class="tight">
+    <div class="container">
+      
+      <header class="section-intro">
+        <span class="frame-tag">R.00 — ENGINEERING</span>
+        <h1>Case studies from building scope things that have to actually work.</h1>
+        <p>Research, precision design, and structure development — filtered by discipline below. Every project links to a full write-up: the constraint, the approach, and what shipped.</p>
+      </header>
 
-<section class="tight">
-  <div class="container">
-    <div class="filter-bar" data-target=".project-card">
-      <button class="filter-chip active" data-filter="all">All</button>
-      <button class="filter-chip" data-filter="automation">Automation</button>
-      <button class="filter-chip" data-filter="thermal">Smart Cities</button>
-      <button class="filter-chip" data-filter="product">Digital Twin</button>
-      <button class="filter-chip" data-filter="analysis">Analysis / software</button>
+      <!-- Filter Navigation Chips -->
+      <div class="filter-bar">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="automation">Automation</button>
+        <button class="chip" data-filter="thermal">Thermal Systems</button>
+        <button class="chip" data-filter="product">Product Design</button>
+        <button class="chip" data-filter="analysis">Analysis / software</button>
+      </div>
+
+      <!-- Complete Project Grid -->
+      <div class="project-grid">
+        
+        <!-- R.01 Automation -->
+        <div class="project-card" data-category="automation">
+          <a href="engineering-project.html">
+            <div class="project-thumb hatch">
+              <img src="img/automation.jpg" alt="Modular conveyor drive assembly" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          </a>
+          <div class="project-info">
+            <span class="frame-tag">R.01 · Automation</span>
+            <h3><a href="engineering-project.html">Digital Site</a></h3>
+            <p>How Automation is changing construction Industry.</p>
+            <div class="tech-tags">
+              <span>Concrete -brick works</span>
+              <span>GD&T</span>
+              <span>DFM</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- R.02 Thermal Systems -->
+        <div class="project-card" data-category="thermal">
+          <a href="engineering-project.html">
+            <div class="project-thumb hatch">
+              <img src="img/Digital.jpg" alt="Low-cost thermal regulator" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          </a>
+          <div class="project-info">
+            <span class="frame-tag">R.02 · Thermal systems</span>
+            <h3><a href="engineering-project.html">Low-cost thermal regulator</a></h3>
+            <p>Passive-cooling redesign that cut BOM cost 22% without losing thermal margin.</p>
+            <div class="tech-tags">
+              <span>ANSYS CFD</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- R.03 Product Design -->
+        <div class="project-card" data-category="product">
+          <a href="engineering-project.html">
+            <div class="project-thumb hatch">
+              <img src="img/Twin.jpg" alt="Ergonomic handheld enclosure" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          </a>
+          <div class="project-info">
+            <span class="frame-tag">R.03 · Product design</span>
+            <h3><a href="engineering-project.html">Ergonomic handheld enclosure</a></h3>
+            <p>From foam model to injection-molded housing in an 11-week sprint.</p>
+            <div class="tech-tags">
+              <span>Fusion 360</span>
+              <span>Injection molding</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- R.04 Analysis -->
+        <div class="project-card" data-category="analysis">
+          <a href="engineering-project.html">
+            <div class="project-thumb hatch">
+              <img src="img/smart.jpg" alt="Tolerance-stack simulator" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          </a>
+          <div class="project-info">
+            <span class="frame-tag">R.04 · Analysis</span>
+            <h3><a href="engineering-project.html">Tolerance-stack simulator</a></h3>
+            <p>Python tool that Monte-Carlo's GD&T stacks in seconds instead of a spreadsheet afternoon.</p>
+            <div class="tech-tags">
+              <span>Python</span>
+              <span>NumPy</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- R.05 Automation Extra Box -->
+        <div class="project-card" data-category="automation">
+          <a href="engineering-project.html">
+            <div class="project-thumb hatch">
+              <img src="img/automation.jpg" alt="Vision-guided pick and place" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          </a>
+          <div class="project-info">
+            <span class="frame-tag">R.05 · Automation</span>
+            <h3><a href="engineering-project.html">Vision-guided pick and place</a></h3>
+            <p>Integrated a machine-vision cell to sort mixed SKUs at 40 units per minute.</p>
+            <div class="tech-tags">
+              <span>Cognex</span>
+              <span>PLC</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- R.06 Product Design Extra Box -->
+        <div class="project-card" data-category="product">
+          <a href="engineering-project.html">
+            <div class="project-thumb hatch">
+              <img src="img/Twin.jpg" alt="Field-serviceable pump housing" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          </a>
+          <div class="project-info">
+            <span class="frame-tag">R.06 · Product design</span>
+            <h3><a href="engineering-project.html">Field-serviceable pump housing</a></h3>
+            <p>Redesigned for tool-free maintenance, cutting average service time from 40 to 9 minutes.</p>
+            <div class="tech-tags">
+              <span>SolidWorks</span>
+              <span>DFA</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+  </section>
 
-    <div class="project-grid">
+  <!-- Interactive Filter Logic and Grid Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const chips = document.querySelectorAll('.chip');
+      const items = document.querySelectorAll('.project-card');
 
-      <div class="project-card" data-category="automation">
-        <a href="engineering-project.html">
-         <div class="project-thumb hatch"><img src="img/automation.jpg" alt="Modular conveyor drive assembly" style="width: 100%; height: 100%; object-fit: cover;"></div>
-        </a>
-        <div class="project-info">
-          <span class="frame-tag">R.01 · Automation</span>
-          <h3><a href="engineering-project.html">Digital Site</a></h3>
-          <p style="color:var(--ink-soft); font-size:0.92rem;">How Automation is changing construction Industry.</p>
-          <div class="stack-list">
-            <span class="stack-pill">Concrete -brick works</span><span class="stack-pill">GD&amp;T</span><span class="stack-pill">DFM</span>
-          </div>
-        </div>
-      </div>
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          chips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
 
-      <div class="project-card" data-category="thermal">
-        <a href="engineering-project.html">
-          <div class="project-thumb hatch"><span class="ph-note">IMG</span></div>
-        </a>
-        <div class="project-info">
-          <span class="frame-tag">R.02 · Digital Twin</span>
-          <h3><a href="engineering-project.html">Low-cost thermal regulator</a></h3>
-          <p style="color:var(--ink-soft); font-size:0.92rem;">Passive-cooling redesign that cut BOM cost 22% without losing thermal margin.</p>
-          <div class="stack-list">
-            <span class="stack-pill">ANSYS</span><span class="stack-pill">CFD</span>
-          </div>
-        </div>
-      </div>
+          const cat = chip.dataset.filter;
 
-      <div class="project-card" data-category="product">
-        <a href="engineering-project.html">
-          <div class="project-thumb hatch">
-  <img src="img/Twin.jpg" alt="Ergonomic handheld enclosure" style="width: 100%; height: 100%; object-fit: cover;">
-</div>
-        </a>
-        <div class="project-info">
-          <span class="frame-tag">R.03 · Product design</span>
-          <h3><a href="engineering-project.html">Ergonomic handheld enclosure</a></h3>
-          <p style="color:var(--ink-soft); font-size:0.92rem;">From foam model to injection-molded housing in an 11-week sprint.</p>
-          <div class="stack-list">
-            <span class="stack-pill">Fusion 360</span><span class="stack-pill">Injection molding</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card" data-category="analysis">
-        <a href="engineering-project.html">
-          <div class="project-thumb hatch"><span class="ph-note">IMG</span></div>
-        </a>
-        <div class="project-info">
-          <span class="frame-tag">R.04 · Analysis</span>
-          <h3><a href="engineering-project.html">Tolerance-stack simulator</a></h3>
-          <p style="color:var(--ink-soft); font-size:0.92rem;">Python tool that Monte-Carlo's GD&amp;T stacks in seconds instead of a spreadsheet afternoon.</p>
-          <div class="stack-list">
-            <span class="stack-pill">Python</span><span class="stack-pill">NumPy</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card" data-category="automation">
-        <a href="engineering-project.html">
-          <div class="project-thumb hatch"><span class="ph-note">IMG</span></div>
-        </a>
-        <div class="project-info">
-          <span class="frame-tag">R.05 · Automation</span>
-          <h3><a href="engineering-project.html">Vision-guided pick and place</a></h3>
-          <p style="color:var(--ink-soft); font-size:0.92rem;">Integrated a machine-vision cell to sort mixed SKUs at 40 units per minute.</p>
-          <div class="stack-list">
-            <span class="stack-pill">Cognex</span><span class="stack-pill">PLC</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card" data-category="product">
-        <a href="engineering-project.html">
-          <div class="project-thumb hatch"><span class="ph-note">IMG</span></div>
-        </a>
-        <div class="project-info">
-          <span class="frame-tag">R.06 · Product design</span>
-          <h3><a href="engineering-project.html">Field-serviceable pump housing</a></h3>
-          <p style="color:var(--ink-soft); font-size:0.92rem;">Redesigned for tool-free maintenance, cutting average service time from 40 to 9 minutes.</p>
-          <div class="stack-list">
-            <span class="stack-pill">SolidWorks</span><span class="stack-pill">DFA</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <div class="foot-bottom" style="border-top:1px solid var(--line); padding-top:1.6rem;">
-      <span>© 2026 Edward Kabuko. All rights reserved.</span>
-      <a href="contact.html">Discuss a project</a>
-    </div>
-  </div>
-</footer>
-
-<script>
-// Mobile nav toggle
-document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.querySelector('.nav-toggle');
-  const links = document.querySelector('.nav-links');
-  if (toggle && links) {
-    toggle.addEventListener('click', () => {
-      links.classList.toggle('open');
-    });
-  }
-
-  // Generic filter chips (used on photography + engineering pages)
-  document.querySelectorAll('.filter-bar').forEach(bar => {
-    const chips = bar.querySelectorAll('.filter-chip');
-    const targetSelector = bar.dataset.target;
-    const items = targetSelector ? document.querySelectorAll(targetSelector) : [];
-    chips.forEach(chip => {
-      chip.addEventListener('click', () => {
-        chips.forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
-        const cat = chip.dataset.filter;
-        items.forEach(item => {
-          if (cat === 'all' || item.dataset.category === cat) {
-            item.style.display = '';
-          } else {
-            item.style.display = 'none';
-          }
+          items.forEach(item => {
+            if (cat === 'all' || item.dataset.category === cat) {
+              item.style.display = '';
+            } else {
+              item.style.display = 'none';
+            }
+          });
         });
       });
     });
-  });
+  </script>
 
-  // Lightbox for photography grid
-  const lightbox = document.getElementById('lightbox');
-  if (lightbox) {
-    const lbTitle = document.getElementById('lb-title');
-    const lbMeta = document.getElementById('lb-meta');
-    document.querySelectorAll('.masonry .m-item').forEach(item => {
-      item.addEventListener('click', () => {
-        lbTitle.textContent = item.dataset.title || 'Untitled';
-        lbMeta.textContent = item.dataset.meta || '';
-        lightbox.classList.add('open');
-      });
-    });
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox || e.target.closest('.lightbox-close')) {
-        lightbox.classList.remove('open');
-      }
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') lightbox.classList.remove('open');
-    });
-  }
+  <!-- Footer layout -->
+  <footer>
+    <p>&copy; 2026 Edward Kabuko. All rights reserved. <a href="contact.html">Discuss a project</a></p>
+  </footer>
 
-  // Contact form (front-end only stub — wire to Formspree/Netlify/etc. at launch)
-  const form = document.getElementById('contact-form');
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const btn = form.querySelector('button[type="submit"]');
-      btn.textContent = 'Message sent';
-      form.reset();
-      setTimeout(() => { btn.textContent = 'Send message'; }, 3000);
-    });
-  }
-
-  // Newsletter form stub
-  document.querySelectorAll('.newsletter-form').forEach(nf => {
-    nf.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const btn = nf.querySelector('button');
-      const original = btn.textContent;
-      btn.textContent = 'Subscribed';
-      nf.reset();
-      setTimeout(() => { btn.textContent = original; }, 2500);
-    });
-  });
-});
-
-</script>
 </body>
 </html>
