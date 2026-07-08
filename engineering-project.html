@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The changeover-time calculator I use on every project — Alex Rivera</title>
+<title>Modular conveyor drive assembly — Alex Rivera</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -430,9 +430,9 @@ body::before{
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="engineering.html">Engineering</a></li>
+      <li><a href="engineering.html" class="active">Engineering</a></li>
       <li><a href="photography.html">Photography</a></li>
-      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="blog.html">Blog</a></li>
     </ul>
     <a href="contact.html" class="nav-cta">Let's talk</a>
     <button class="nav-toggle" aria-label="Toggle menu">☰</button>
@@ -440,40 +440,48 @@ body::before{
 </nav>
 
 <header class="hero" style="padding-bottom:1rem;">
-  <div class="container article-head">
-    <a href="blog.html" style="font-family:var(--font-mono); font-size:0.8rem; color:var(--muted);">← Back to blog</a>
-    <div class="eyebrow" style="margin-top:1.6rem;">Tolerancing</div>
-    <h1>The changeover-time calculator I use on <span class="grad">every project</span></h1>
-    <p class="post-meta" style="margin-top:0.8rem; display:block;">Jul 2, 2026 · 6 min read · By Alex Rivera</p>
+  <div class="container">
+    <a href="engineering.html" style="font-family:var(--font-mono); font-size:0.8rem; color:var(--muted);">← Back to engineering</a>
+    <div class="eyebrow" style="margin-top:1.6rem;">R.01 — automation</div>
+    <h1 style="max-width:760px;">Modular <span class="grad">conveyor drive assembly</span></h1>
+    <p class="lede">A swappable drive module that cut changeover time 40% across a mixed-SKU packaging line.</p>
   </div>
 </header>
 
 <section class="tight">
   <div class="container">
-    <div class="article-cover hatch"><span class="ph-note">Cover image — replace</span></div>
+    <div class="cs-meta-bar">
+      <div><span>Client</span>Mid-size CPG manufacturer</div>
+      <div><span>Role</span>Lead mechanical engineer</div>
+      <div><span>Duration</span>14 weeks</div>
+      <div><span>Tools</span>SolidWorks, GD&amp;T, DFM review</div>
+    </div>
+
     <div class="article-body">
-      <p>Every changeover redesign starts with the same question from whoever's paying for it: how much time will this actually save? For years I answered that with a gut estimate. Then I built a spreadsheet, and the estimates got a lot more convincing.</p>
+      <h2>The problem</h2>
+      <p>The line ran six SKUs on one conveyor, and every changeover meant a two-hour mechanical reset — realigning drive shafts, swapping sprockets, and re-tensioning belts by hand. At six changeovers a week, that was over 600 hours a year of pure downtime.</p>
 
-      <h2>Why a rough estimate isn't good enough</h2>
-      <p>A changeover redesign is usually a four or five figure ask before you've cut a single part. Stakeholders don't fund vibes — they fund a number they can hold you to. The calculator below breaks changeover time into the pieces that are actually addressable by design (alignment, fastening, tooling swap) versus the pieces that aren't (material handling, documentation).</p>
+      <h2>The approach</h2>
+      <p>Rather than redesign the whole conveyor, I isolated the drive train into a single quick-release module. Each SKU got its own pre-aligned cartridge that technicians could swap in under three minutes, with kinematic locating features doing the alignment work that used to take a technician with a dial indicator twenty minutes to get right.</p>
+      <blockquote>The best fix wasn't a smarter conveyor — it was making alignment something the geometry did automatically instead of something a person had to get right by hand.</blockquote>
+      <p>I ran three DFM iterations with the machine shop before landing on a cartridge that could be manufactured on existing tooling, keeping incremental cost under $40 per unit.</p>
 
-      <blockquote>If you can't point to which specific step your redesign shortens, you don't have a design yet — you have a hope.</blockquote>
+      <div class="cs-gallery">
+        <div class="cs-img tall"><span class="ph-note">Drawing — replace</span></div>
+        <div class="cs-img"><span class="ph-note">Photo — replace</span></div>
+        <div class="cs-img"><span class="ph-note">Photo — replace</span></div>
+      </div>
 
-      <h2>How the calculator works</h2>
-      <p>You enter your current changeover steps and their durations, tag each as mechanical or procedural, and the sheet models three redesign scenarios: quick-release fasteners, kinematic locating, and full cartridge swap — the same approach from the conveyor drive case study. It outputs a projected new changeover time and a rough payback period based on your changeover frequency.</p>
+      <h2>The result</h2>
+      <p>Changeover time dropped from roughly two hours to eleven minutes. The line now runs six SKUs in the time it used to take for three, and the client has since ordered cartridges for two additional lines.</p>
 
       <div class="promo-box">
         <div>
-          <strong style="font-family:var(--font-display); display:block; margin-bottom:0.3em;">Download the calculator</strong>
-          <span style="font-size:0.9rem; color:var(--ink-soft);">Free Google Sheets template — make a copy and plug in your own numbers.</span>
+          <strong style="font-family:var(--font-display); display:block; margin-bottom:0.3em;">Want the full teardown?</strong>
+          <span style="font-size:0.9rem; color:var(--ink-soft);">Get the changeover-time calculator I used on this project.</span>
         </div>
-        <a href="#" class="btn btn-amber">Get it free</a>
+        <a href="blog.html" class="btn btn-amber">Get the download</a>
       </div>
-
-      <h2>What I'd add if I rebuilt it</h2>
-      <p>The current version doesn't account for operator training time on a new fixture, which matters more than I expected the first time a client rolled this out across a night shift with less CAD literacy than the day crew. If you use the sheet and find gaps, reply to the newsletter — I read every message.</p>
-
-      <p style="font-size:0.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:1rem; margin-top:2.5rem;">Disclosure: some tool links in this article are affiliate links. If you buy through them, I earn a small commission at no extra cost to you.</p>
     </div>
   </div>
 </section>
@@ -482,7 +490,7 @@ body::before{
   <div class="container">
     <div class="foot-bottom" style="border-top:1px solid var(--line); padding-top:1.6rem;">
       <span>© 2026 Alex Rivera. All rights reserved.</span>
-      <a href="blog.html">More articles</a>
+      <a href="contact.html">Discuss a similar project</a>
     </div>
   </div>
 </footer>

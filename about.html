@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The changeover-time calculator I use on every project — Alex Rivera</title>
+<title>About — Alex Rivera</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -429,60 +429,148 @@ body::before{
     <a href="index.html" class="brand"><span class="dot"></span>A. RIVERA</a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="about.html" class="active">About</a></li>
       <li><a href="engineering.html">Engineering</a></li>
       <li><a href="photography.html">Photography</a></li>
-      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="blog.html">Blog</a></li>
     </ul>
     <a href="contact.html" class="nav-cta">Let's talk</a>
     <button class="nav-toggle" aria-label="Toggle menu">☰</button>
   </div>
 </nav>
 
-<header class="hero" style="padding-bottom:1rem;">
-  <div class="container article-head">
-    <a href="blog.html" style="font-family:var(--font-mono); font-size:0.8rem; color:var(--muted);">← Back to blog</a>
-    <div class="eyebrow" style="margin-top:1.6rem;">Tolerancing</div>
-    <h1>The changeover-time calculator I use on <span class="grad">every project</span></h1>
-    <p class="post-meta" style="margin-top:0.8rem; display:block;">Jul 2, 2026 · 6 min read · By Alex Rivera</p>
+<header class="hero" style="padding-bottom:3rem;">
+  <div class="container">
+    <div class="eyebrow">F.00 — about</div>
+    <h1 style="max-width:780px;">I spend my days solving problems with equations, and <span class="grad">my evenings solving them with light</span>.</h1>
   </div>
 </header>
 
 <section class="tight">
+  <div class="container split">
+    <div>
+      <h2>The engineer</h2>
+      <p>I'm a mechanical engineer with ten years in product development, mostly in automation and precision assembly. I'm drawn to constrained problems — the ones where the physics, the budget, and the deadline all push back at once. Certified Six Sigma Green Belt; I've shipped systems used across manufacturing lines on three continents.</p>
+      <p>What I actually like about the work: tolerance stacking, failure analysis, and the moment a prototype finally does the thing you drew on paper six weeks earlier.</p>
+    </div>
+    <div>
+      <h2>The photographer</h2>
+      <p>I picked up a camera the same year I started my first engineering job — partly as a counterweight, mostly because I couldn't stop noticing light. Landscape and street work, shot mostly on a single 35mm prime because limits make you better at seeing.</p>
+      <p>Photography doesn't hand me a spec sheet. It's the one part of my week where "good enough" is actually a valid answer, and I've come to need that.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section>
   <div class="container">
-    <div class="article-cover hatch"><span class="ph-note">Cover image — replace</span></div>
-    <div class="article-body">
-      <p>Every changeover redesign starts with the same question from whoever's paying for it: how much time will this actually save? For years I answered that with a gut estimate. Then I built a spreadsheet, and the estimates got a lot more convincing.</p>
-
-      <h2>Why a rough estimate isn't good enough</h2>
-      <p>A changeover redesign is usually a four or five figure ask before you've cut a single part. Stakeholders don't fund vibes — they fund a number they can hold you to. The calculator below breaks changeover time into the pieces that are actually addressable by design (alignment, fastening, tooling swap) versus the pieces that aren't (material handling, documentation).</p>
-
-      <blockquote>If you can't point to which specific step your redesign shortens, you don't have a design yet — you have a hope.</blockquote>
-
-      <h2>How the calculator works</h2>
-      <p>You enter your current changeover steps and their durations, tag each as mechanical or procedural, and the sheet models three redesign scenarios: quick-release fasteners, kinematic locating, and full cartridge swap — the same approach from the conveyor drive case study. It outputs a projected new changeover time and a rough payback period based on your changeover frequency.</p>
-
-      <div class="promo-box">
-        <div>
-          <strong style="font-family:var(--font-display); display:block; margin-bottom:0.3em;">Download the calculator</strong>
-          <span style="font-size:0.9rem; color:var(--ink-soft);">Free Google Sheets template — make a copy and plug in your own numbers.</span>
-        </div>
-        <a href="#" class="btn btn-amber">Get it free</a>
+    <div class="eyebrow">Where they meet</div>
+    <h2 style="max-width:640px;">Both jobs start with a constraint and end with something built.</h2>
+    <div class="split" style="margin-top:2.5rem;">
+      <div>
+        <p><strong style="font-weight:600;">Structure, either way.</strong> A well-composed frame and a well-toleranced assembly are both exercises in noticing what's load-bearing and cutting the rest.</p>
+        <p><strong style="font-weight:600;">Iteration over inspiration.</strong> Neither a working prototype nor a good photograph shows up on the first try — both come from shooting or building far more than you keep.</p>
       </div>
+      <div>
+        <p><strong style="font-weight:600;">Patience with the invisible.</strong> Waiting for the right light and waiting for a stress test are the same muscle: doing nothing, correctly, until the moment is right.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <h2>What I'd add if I rebuilt it</h2>
-      <p>The current version doesn't account for operator training time on a new fixture, which matters more than I expected the first time a client rolled this out across a night shift with less CAD literacy than the day crew. If you use the sheet and find gaps, reply to the newsletter — I read every message.</p>
+<hr class="rule">
 
-      <p style="font-size:0.85rem; color:var(--muted); border-top:1px solid var(--line); padding-top:1rem; margin-top:2.5rem;">Disclosure: some tool links in this article are affiliate links. If you buy through them, I earn a small commission at no extra cost to you.</p>
+<section>
+  <div class="container">
+    <div class="eyebrow">Timeline</div>
+    <h2 style="margin-bottom:2.5rem;">Two threads, running in parallel.</h2>
+    <div class="timeline">
+      <div class="item eng">
+        <span class="frame-tag">2016 · R.01</span>
+        <h3>First engineering role</h3>
+        <p style="color:var(--ink-soft);">Joined an automation firm designing conveyor and packaging systems.</p>
+      </div>
+      <div class="item photo">
+        <span class="frame-tag">2016 · F.01</span>
+        <h3>Bought a used 35mm prime</h3>
+        <p style="color:var(--ink-soft);">Started shooting film on weekends — mostly failures, a few keepers.</p>
+      </div>
+      <div class="item eng">
+        <span class="frame-tag">2019 · R.14</span>
+        <h3>Led first full product launch</h3>
+        <p style="color:var(--ink-soft);">Owned a thermal regulation system from concept through production.</p>
+      </div>
+      <div class="item photo">
+        <span class="frame-tag">2021 · F.09</span>
+        <h3>First group exhibition</h3>
+        <p style="color:var(--ink-soft);">Coastal fog series shown in a local gallery show.</p>
+      </div>
+      <div class="item eng">
+        <span class="frame-tag">2023 · R.22</span>
+        <h3>Started independent consulting</h3>
+        <p style="color:var(--ink-soft);">Now split between contract engineering work and writing.</p>
+      </div>
+      <div class="item photo">
+        <span class="frame-tag">2025 · F.31</span>
+        <h3>Began licensing prints</h3>
+        <p style="color:var(--ink-soft);">Selected images now available as limited prints.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section>
+  <div class="container">
+    <div class="eyebrow">Toolkit</div>
+    <h2 style="margin-bottom:2.5rem;">What I actually use.</h2>
+    <div class="skills-grid">
+      <div class="skill-block">
+        <h4>Engineering</h4>
+        <div class="skill-row"><span>SolidWorks / CAD</span><span>Expert</span></div>
+        <div class="skill-bar"><i style="width:92%;"></i></div>
+        <div class="skill-row"><span>GD&amp;T / tolerancing</span><span>Expert</span></div>
+        <div class="skill-bar"><i style="width:88%;"></i></div>
+        <div class="skill-row"><span>Python for analysis</span><span>Proficient</span></div>
+        <div class="skill-bar"><i style="width:70%;"></i></div>
+      </div>
+      <div class="skill-block">
+        <h4>Photography</h4>
+        <div class="skill-row"><span>Manual exposure / film</span><span>Expert</span></div>
+        <div class="skill-bar"><i style="width:90%; background:var(--amber);"></i></div>
+        <div class="skill-row"><span>Lightroom / darkroom</span><span>Expert</span></div>
+        <div class="skill-bar"><i style="width:85%; background:var(--amber);"></i></div>
+        <div class="skill-row"><span>Studio lighting</span><span>Proficient</span></div>
+        <div class="skill-bar"><i style="width:65%; background:var(--amber);"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="tight">
+  <div class="container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem;">
+    <div>
+      <div class="eyebrow">Next step</div>
+      <h2 style="margin-bottom:0;">Where do you want to go?</h2>
+    </div>
+    <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+      <a href="engineering.html" class="btn btn-blue">Engineering work</a>
+      <a href="photography.html" class="btn btn-amber">Photography</a>
+      <a href="blog.html" class="btn btn-ghost">Latest post</a>
+      <a href="resume.pdf" class="btn btn-primary">Download résumé</a>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="container">
-    <div class="foot-bottom" style="border-top:1px solid var(--line); padding-top:1.6rem;">
+    <div class="foot-bottom" style="border-top:none; padding-top:0;">
       <span>© 2026 Alex Rivera. All rights reserved.</span>
-      <a href="blog.html">More articles</a>
+      <a href="contact.html">Contact</a>
     </div>
   </div>
 </footer>
