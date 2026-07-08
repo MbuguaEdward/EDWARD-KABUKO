@@ -1,48 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Engineering — Edward Kabuko</title>
-  <!-- Link to your CSS stylesheet here -->
-</head>
-<body>
-
-  <!-- Navigation header -->
-  <header>
-    <a href="index.html">E. Edwards</a>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="engineering.html">Engineering</a>
-      <a href="photography.html">Photography</a>
-      <a href="blog.html">Blog</a>
-    </nav>
-    <a href="contact.html">Let's talk</a>
-  </header>
-
-  <!-- Main Content Body -->
-  <section class="tight">
-    <div class="container">
-      
-      <header class="section-intro">
-        <span class="frame-tag">R.00 — ENGINEERING</span>
-        <h1>Case studies from building scope things that have to actually work.</h1>
-        <p>Research, precision design, and structure development — filtered by discipline below. Every project links to a full write-up: the constraint, the approach, and what shipped.</p>
-      </header>
-
-      <!-- Filter Navigation Chips -->
-      <div class="filter-bar">
-        <button class="chip active" data-filter="all">All</button>
-        <button class="chip" data-filter="automation">Automation</button>
-        <button class="chip" data-filter="thermal">Thermal Systems</button>
-        <button class="chip" data-filter="product">Product Design</button>
-        <button class="chip" data-filter="analysis">Analysis / software</button>
-      </div>
-
-      <!-- Complete Project Grid -->
-      <div class="project-grid">
-        
+<div class="project-grid">
         <!-- R.01 Automation -->
         <div class="project-card" data-category="automation">
           <a href="engineering-project.html">
@@ -152,38 +108,3 @@
         </div>
 
       </div>
-    </div>
-  </section>
-
-  <!-- Interactive Filter Logic and Grid Script -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const chips = document.querySelectorAll('.chip');
-      const items = document.querySelectorAll('.project-card');
-
-      chips.forEach(chip => {
-        chip.addEventListener('click', () => {
-          chips.forEach(c => c.classList.remove('active'));
-          chip.classList.add('active');
-
-          const cat = chip.dataset.filter;
-
-          items.forEach(item => {
-            if (cat === 'all' || item.dataset.category === cat) {
-              item.style.display = '';
-            } else {
-              item.style.display = 'none';
-            }
-          });
-        });
-      });
-    });
-  </script>
-
-  <!-- Footer layout -->
-  <footer>
-    <p>&copy; 2026 Edward Kabuko. All rights reserved. <a href="contact.html">Discuss a project</a></p>
-  </footer>
-
-</body>
-</html>
