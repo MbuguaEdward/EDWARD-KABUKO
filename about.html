@@ -8,24 +8,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ===================================================================
-   DESIGN TOKENS (Matched perfectly to the revised index.html)
+   DESIGN TOKENS (Premium Cinematic Dark Mode)
 =================================================================== */
 :root{
   --ink:#F3F3F6;
   --ink-soft:#B7B7C2;
   --muted:#84848F;
   --paper:#08080B;
-  --paper-2:#131318;
-  --paper-3:#1C1C23;
-  --white:#141419;
+  --paper-2:#111116;
+  --paper-3:#171721;
+  --white:#121217;
   --line:rgba(255,255,255,0.11);
-  --line-soft:rgba(255,255,255,0.06);
+  --line-soft:rgba(255,255,255,0.05);
+  
+  /* Cyberpunk / Engineering High-Contrast Accents */
   --blue:#8B5CF6;
   --blue-deep:#B9A2FF;
-  --blue-tint:rgba(139,92,246,0.14);
+  --blue-tint:rgba(139,92,246,0.15);
   --amber:#FF7A45;
   --amber-deep:#FFA36B;
-  --amber-tint:rgba(255,122,69,0.14);
+  --amber-tint:rgba(255,122,69,0.15);
+  --grad-primary: linear-gradient(135deg, var(--blue) 0%, #B27CFF 50%, var(--amber) 100%);
 
   --font-display:'Space Grotesk', sans-serif;
   --font-body:'Inter', -apple-system, sans-serif;
@@ -44,6 +47,7 @@ body{
   font-size:17px;
   line-height:1.65;
   -webkit-font-smoothing:antialiased;
+  overflow-x: hidden;
 }
 a{color:inherit;text-decoration:none;}
 ul{list-style:none;margin:0;padding:0;}
@@ -51,18 +55,28 @@ button{font-family:inherit;cursor:pointer;}
 
 .container{max-width:var(--max);margin:0 auto;padding:0 6vw;}
 
-/* blueprint grid background */
+/* Animated/Glow Ambient Elements */
 .grid-bg{
   position:fixed;inset:0;z-index:-1;pointer-events:none;
   background-image:
     linear-gradient(var(--line-soft) 1px, transparent 1px),
     linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
   background-size:64px 64px;
-  opacity:0.35;
-  mask-image:linear-gradient(to bottom, black, transparent 70%);
+  opacity:0.4;
+  mask-image:radial-gradient(circle at 50% 30%, black 40%, transparent 85%);
 }
 
-/* ===================== TYPE ===================== */
+.glow-field{ position:fixed; inset:0; z-index:-2; pointer-events:none; overflow:hidden; }
+.glow{ position:absolute; border-radius:50%; filter:blur(120px); pointer-events:none; opacity: 0.6; }
+.glow-a{ width:700px; height:700px; top:-250px; left:-200px; background:radial-gradient(circle, rgba(139,92,246,0.22), transparent 70%); }
+.glow-b{ width:600px; height:600px; top:40%; right:-250px; background:radial-gradient(circle, rgba(255,122,69,0.15), transparent 70%); }
+
+/* ===================== TYPE & ANIMATIONS ===================== */
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(24px); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
 h1,h2,h3{
   font-family:var(--font-display);
   font-weight:500;
@@ -70,10 +84,23 @@ h1,h2,h3{
   margin:0 0 0.6em;
   color:var(--ink);
 }
-h1{font-size:clamp(2.4rem, 4.5vw, 4rem); line-height:1.1; letter-spacing:-0.02em;}
-h2{font-size:clamp(1.6rem, 3vw, 2.2rem); margin-bottom:1rem;}
-h3{font-size:1.25rem; margin-bottom:0.5rem;}
+h1{
+  font-size:clamp(2.5rem, 5vw, 4.2rem); 
+  line-height:1.08; 
+  letter-spacing:-0.03em;
+  animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+h2{font-size:clamp(1.8rem, 3.5vw, 2.5rem); margin-bottom:1rem;}
+h3{font-size:1.35rem; margin-bottom:0.5rem;}
 p{margin:0 0 1.3em; color:var(--ink-soft); font-size:1.05rem;}
+
+.grad-text {
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .eyebrow{
   font-family:var(--font-mono);
   font-size:0.78rem;
@@ -83,13 +110,13 @@ p{margin:0 0 1.3em; color:var(--ink-soft); font-size:1.05rem;}
   display:flex;align-items:center;gap:0.6em;
   margin-bottom:1.5rem;
 }
-.eyebrow::before{content:"";width:22px;height:1px;background:var(--line);display:inline-block;}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--blue);display:inline-block;}
 
 /* ===================== NAV ===================== */
 .site-nav{
   position:sticky; top:0; z-index:50;
-  background:rgba(8,8,11,0.72);
-  backdrop-filter:blur(14px);
+  background:rgba(8,8,11,0.75);
+  backdrop-filter:blur(16px);
   border-bottom:1px solid var(--line);
 }
 .site-nav .container{
@@ -100,80 +127,124 @@ p{margin:0 0 1.3em; color:var(--ink-soft); font-size:1.05rem;}
   font-family:var(--font-mono); font-size:1rem; font-weight:500;
   display:flex; align-items:center; gap:0.5em;
 }
-.brand .dot{width:8px;height:8px;border-radius:50%; background:linear-gradient(135deg, var(--blue), var(--amber));}
+.brand .dot{
+  width:9px; height:9px; border-radius:50%; 
+  background: var(--grad-primary);
+  box-shadow: 0 0 10px rgba(139,92,246,0.6);
+}
 .nav-links{display:flex; gap:2.1rem; align-items:center;}
-.nav-links a{font-family:var(--font-mono); font-size:0.82rem; color:var(--ink-soft); position:relative; padding:0.3em 0;}
+.nav-links a{font-family:var(--font-mono); font-size:0.82rem; color:var(--ink-soft); position:relative; padding:0.3em 0; transition: color 0.2s;}
 .nav-links a.active, .nav-links a:hover{color:var(--ink);}
-.nav-links a.active::after{content:""; position:absolute; left:0; right:0; bottom:-2px; height:2px; background:var(--blue);}
-.nav-cta{font-family:var(--font-mono); font-size:0.78rem; border:1px solid var(--ink); padding:0.55em 1.1em; border-radius:2px;}
-.nav-cta:hover{background:var(--ink); color:var(--white);}
+.nav-links a.active::after{content:""; position:absolute; left:0; right:0; bottom:-2px; height:2px; background:var(--blue-deep);}
+.nav-cta{
+  font-family:var(--font-mono); font-size:0.78rem; border:1px solid var(--line); 
+  padding:0.55em 1.1em; border-radius:2px; transition: all 0.2s;
+}
+.nav-cta:hover{background:var(--ink); color:var(--paper); border-color:var(--ink); box-shadow: 0 4px 15px rgba(255,255,255,0.1);}
 .nav-toggle{display:none; background:none; border:none; color:var(--ink); font-size:1.5rem;}
 
 /* ===================== ABOUT CONTENT LAYOUT ===================== */
-.about-hero{padding:6rem 0 4rem;}
+.about-hero{padding:7rem 0 4rem;}
 .about-grid{
   display:grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap:4rem;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap:5rem;
   padding-bottom:5rem;
 }
-.bio-text strong{color:var(--ink); font-weight:500;}
+.bio-text strong{color:var(--ink); font-weight:500; border-bottom: 1px dashed var(--amber);}
 
-/* Focus Block / Cards */
-.focus-section{
-  border-top:1px solid var(--line);
-  padding:4rem 0;
-}
-.focus-grid{
-  display:grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap:1.5rem;
-  margin-top:2rem;
-}
-.focus-card{
-  background:var(--white);
-  border:1px solid var(--line);
-  padding:2rem;
-  border-radius:2px;
-}
-.focus-card .icon-label{
-  font-family:var(--font-mono);
-  font-size:0.75rem;
-  color:var(--blue-deep);
-  display:block;
-  margin-bottom:0.7rem;
-}
-.focus-card p{font-size:0.95rem; margin-bottom:0;}
-
-/* Sidebar items */
+/* Sidebar Info Panel */
 .sidebar-box{
-  background:var(--paper-2);
-  border:1px solid var(--line);
-  padding:2rem;
-  position:sticky;
-  top:120px;
+  background: linear-gradient(145deg, var(--paper-2), var(--paper));
+  border: 1px solid var(--line);
+  padding: 2.2rem;
+  position: sticky;
+  top: 120px;
+  border-radius: 4px;
+  box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5);
 }
 .info-list{margin-top:1.5rem;}
 .info-item{
   display:flex;
   justify-content:space-between;
   border-bottom:1px solid var(--line-soft);
-  padding:0.8rem 0;
+  padding:0.9rem 0;
   font-size:0.9rem;
 }
 .info-item .label{font-family:var(--font-mono); color:var(--muted);}
-.info-item .val{color:var(--ink); text-align:right;}
+.info-item .val{color:var(--ink); text-align:right; font-weight: 500;}
+
+/* ===================== HIGH-AESTHETIC CARDS GRID ===================== */
+.focus-section{
+  border-top:1px solid var(--line);
+  padding:6rem 0;
+  position: relative;
+}
+.focus-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:2rem;
+  margin-top:3rem;
+}
+.focus-card{
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 2.5rem;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Hidden gradient top bar revealed on hover */
+.focus-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--grad-primary);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Micro animations on hover */
+.focus-card:hover{
+  transform: translateY(-6px) scale(1.01);
+  border-color: rgba(139,92,246,0.4);
+  background: var(--paper-2);
+  box-shadow: 
+    0 0 0 1px rgba(139,92,246,0.1),
+    0 20px 40px -20px rgba(139,92,246,0.3);
+}
+.focus-card:hover::before {
+  opacity: 1;
+}
+
+.focus-card .icon-label{
+  font-family:var(--font-mono);
+  font-size:0.75rem;
+  color:var(--amber-deep);
+  letter-spacing: 0.05em;
+  display:block;
+  margin-bottom:1rem;
+}
+.focus-card p{font-size:0.98rem; margin-bottom:0; transition: color 0.3s;}
+.focus-card:hover p {color: var(--ink);}
+
+.hatch{
+  background-image: repeating-linear-gradient(45deg, var(--line-soft) 0, var(--line-soft) 1px, transparent 1px, transparent 14px);
+}
 
 /* ===================== FOOTER ===================== */
-footer{border-top:1px solid var(--line); padding:3.4rem 0 2.2rem;}
+footer{border-top:1px solid var(--line); padding:3.4rem 0 2.2rem; background: var(--paper-2);}
 .foot-bottom{
   display:flex; justify-content:space-between; align-items:center;
   font-family:var(--font-mono); font-size:0.75rem; color:var(--muted);
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE OVERRIDES */
 @media (max-width:920px){
-  .about-grid{grid-template-columns: 1fr;}
+  .about-grid{grid-template-columns: 1fr; gap: 3rem;}
   .focus-grid{grid-template-columns: 1fr;}
   .sidebar-box{position:static;}
 }
@@ -186,7 +257,12 @@ footer{border-top:1px solid var(--line); padding:3.4rem 0 2.2rem;}
 </style>
 </head>
 <body>
+
 <div class="grid-bg"></div>
+<div class="glow-field">
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+</div>
 
 <!-- Navigation -->
 <nav class="site-nav">
@@ -207,67 +283,68 @@ footer{border-top:1px solid var(--line); padding:3.4rem 0 2.2rem;}
 <!-- Main About Content -->
 <main class="container">
   <header class="about-hero">
-    <div class="eyebrow">F.00 — Profile Context</div>
-    <h1>The convergence of physical spaces and digital engineering layers.</h1>
+    <div class="eyebrow">F.01 — Strategic Identity</div>
+    <h1>The intersection of physical spaces and <span class="grad-text">intelligent digital layers</span>.</h1>
   </header>
 
   <div class="about-grid">
-    <!-- Left side: The honest profile story -->
+    <!-- Left Column: Narrative -->
     <div class="bio-text">
-      <p>Hello, I’m <strong>Edward Kabuko</strong>. I am currently a Civil Engineering student at Meru University of Science and Technology. My engineering path isn’t just about calculating static physical weights—it's driven by how modern computing can model, visualize, and optimize those assets dynamically.</p>
+      <p>Hello, I’m <strong>Edward Kabuko</strong>. I am currently a Civil Engineering student at Meru University of Science and Technology. My engineering philosophy stretches past calculating static structural loads—it's centered on how modern computing interfaces can translate, visualize, and scale those assets dynamically.</p>
       
-      <p>Let's be completely transparent: <strong>I haven’t deployed massive, multi-million dollar engineering projects in the field yet.</strong> I am actively building my foundation. However, my strength lies in my practical skill set and genuine obsession with technical design execution, clean web UI/UX layouts, and the emerging intersections of structural construction and data science.</p>
+      <p>Let's remain completely grounded: <strong>I haven’t deployed grand production projects out in the field just yet.</strong> I am actively charting my raw path forward. My true competitive strength lies in my dedicated personal technical tooling, crisp web layout execution, and a fierce drive toward the future of structural asset computing.</p>
 
-      <p>I focus deeply on converting complex layout concepts into highly structured, clean blueprints—whether that's through raw code, clean web user interfaces, or interactive system dashboards.</p>
+      <p>I view web engineering and visual modeling similarly: both rely on crisp layout rules, rigorous logic frameworks, and intuitive hierarchies that transform abstract code inputs into beautifully clean interactive experiences.</p>
     </div>
 
-    <!-- Right side: Quick Technical Identity card -->
+    <!-- Right Column: Context Widget -->
     <div class="sidebar">
-      <div class="sidebar-box">
-        <h3>Current Status</h3>
-        <p style="font-size: 0.9rem; margin-bottom: 1rem;">Balancing undergraduate structural modules with open-source engineering development.</p>
-        <div class="info-list">
+      <div class="sidebar-box hatch">
+        <h3 style="position: relative; z-index: 2;">Current Vector</h3>
+        <p style="font-size: 0.9rem; margin-bottom: 1rem; position: relative; z-index: 2;">Merging civil principles with visual engineering frameworks.</p>
+        <div class="info-list" style="position: relative; z-index: 2;">
           <div class="info-item"><span class="label">Institution</span><span class="val">Meru Univ. of Sci. &amp; Tech</span></div>
-          <div class="info-item"><span class="label">Major</span><span class="val">Civil Engineering</span></div>
-          <div class="info-item"><span class="label">Core Tooling</span><span class="val">BIM, HTML/CSS, Python</span></div>
-          <div class="info-item"><span class="label">Focus</span><span class="val">Layout Design &amp; Digital Twins</span></div>
+          <div class="info-item"><span class="label">Academic Focus</span><span class="val">Civil Engineering</span></div>
+          <div class="info-item"><span class="label">Core Speciality</span><span class="val">BIM &amp; Layout UX</span></div>
+          <div class="info-item"><span class="label">Obsessions</span><span class="val">Digital Twins / Smart Systems</span></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Focused Intentions Grid -->
+  <!-- Interactive Pillars Grid -->
   <section class="focus-section">
+    <div class="eyebrow">Target Spheres</div>
     <h2>Where I'm Allocating My Energy</h2>
-    <p style="max-width: 680px; margin-bottom: 2rem;">I am training my technical eyes and developing specific core proficiencies every single day:</p>
+    <p style="max-width: 680px; margin-bottom: 1rem;">Developing specialized competencies through self-directed testing and design iterations:</p>
 
     <div class="focus-grid">
-      <!-- Pillar 1 -->
+      <!-- Card 1 -->
       <div class="focus-card">
-        <span class="icon-label">// 01 VISUAL MODELING</span>
-        <h3>BIM & Layout Visualization</h3>
-        <p>Structuring accurate spatial interfaces. I care deeply about how architectural elements and technical assets are represented visually, ensuring clean geometric hierarchies both on paper and on screen.</p>
+        <span class="icon-label">// 01 RENDERING & GRAPHICS</span>
+        <h3>BIM & Visualization</h3>
+        <p>Structuring accurate spatial interfaces. I care deeply about how architectural elements and blueprints are engineered visually, maintaining clean geometric clarity both on paper layouts and across screen dashboards.</p>
       </div>
 
-      <!-- Pillar 2 -->
+      <!-- Card 2 -->
       <div class="focus-card">
-        <span class="icon-label">// 02 FUTURE PARADIGM</span>
-        <h3>Digital Twin Innovation</h3>
-        <p>I am passionate about creating real-time virtual mirrors of physical workflows. Connecting streaming sensory data back to concrete models to monitor structural health and lifespan accurately.</p>
+        <span class="icon-label">// 02 REAL-TIME CLOUD</span>
+        <h3>Digital Twin Technology</h3>
+        <p>I am passionate about building real-time virtual mirrors of physical workflows. Connecting streaming sensory datasets back to physical concrete models to predict long-term structural fatigue and lifestyle wear dynamically.</p>
       </div>
 
-      <!-- Pillar 3 -->
+      <!-- Card 3 -->
       <div class="focus-card">
-        <span class="icon-label">// 03 SYSTEM AUTOMATION</span>
-        <h3>Smart Building Systems</h3>
-        <p>Exploring how intelligent automation and machine learning loops can manage structural energy loads, optimize building layout operations, and change the future of the construction industry.</p>
+        <span class="icon-label">// 03 CYBERPHYSICAL SENSORS</span>
+        <h3>Building Smart Systems</h3>
+        <p>Investigating how intelligent automation frameworks can balance live energy loads, route municipal utility pipelines cleanly, and redefine standard operational logistics within modern smart cities.</p>
       </div>
 
-      <!-- Pillar 4 -->
+      <!-- Card 4 -->
       <div class="focus-card">
-        <span class="icon-label">// 04 CORE FRAMEWORK</span>
-        <h3>Data & Logic Foundations</h3>
-        <p>Writing clean, mathematical scripting logic in Python and utilizing frontend systems to build tools that take raw construction telemetry points and render them into usable user views.</p>
+        <span class="icon-label">// 04 INTERACTION ARCHITECTURE</span>
+        <h3>Layout Design Logic</h3>
+        <p>Writing highly structured, responsive semantic mockups. Using clean logic loops and modern CSS styling architectures to shape intuitive software panels that turn heavy raw engineering text into functional artwork.</p>
       </div>
     </div>
   </section>
@@ -278,19 +355,20 @@ footer{border-top:1px solid var(--line); padding:3.4rem 0 2.2rem;}
   <div class="container">
     <div class="foot-bottom">
       <span>© 2026 Edward Kabuko. All rights reserved.</span>
-      <a href="contact.html">Discuss a project</a>
+      <a href="contact.html" style="border-bottom: 1px solid var(--muted); padding-bottom: 2px;">Discuss a project &rarr;</a>
     </div>
   </div>
 </footer>
 
 <script>
-// Handle responsive mobile navigation drawer toggle
+// Mobile Navigation Toggle Animation
 document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.querySelector('.nav-toggle');
   const links = document.querySelector('.nav-links');
   if (toggle && links) {
     toggle.addEventListener('click', () => {
       links.classList.toggle('open');
+      toggle.textContent = links.classList.contains('open') ? '✕' : '☰';
     });
   }
 });
