@@ -147,6 +147,7 @@ section{padding:6rem 0;}
   position: absolute; top: 30px; right: 40px; background: none; border: none; color: var(--ink-soft);
   font-family: var(--font-mono); font-size: 0.85rem; padding: 0.5em 1em; border: 1px solid var(--line); border-radius: 4px;
 }
+.lightbox-close:hover { border-color: var(--ink); color: var(--ink); }
 .lightbox-caption { margin-top: 1.5rem; font-family: var(--font-display); font-size: 1.2rem; color: var(--ink); }
 
 footer{border-top:1px solid var(--line); padding:3.5rem 0 2.5rem; margin-top:5rem;}
@@ -181,47 +182,113 @@ footer{border-top:1px solid var(--line); padding:3.5rem 0 2.5rem; margin-top:5re
       <h2>Captured Frames</h2>
     </div>
 
-    <!-- Category Controls -->
+    <!-- Interface Filter Controls -->
     <div class="filter-controls">
       <button class="filter-btn active" data-filter="all">All Frames</button>
-      <button class="filter-btn" data-filter="portrait">Portraits</button>
-      <button class="filter-btn" data-filter="official">Official</button>
-      <button class="filter-btn" data-filter="creative">Creative</button>
+      <button class="filter-btn" data-filter="render">Render & Design</button>
+      <button class="filter-btn" data-filter="captured">Captured Photography</button>
+      <button class="filter-btn" data-filter="identity">Identity & Graphics</button>
     </div>
 
-    <!-- Restored Gallery Sequence -->
+    <!-- Restored Complete Gallery Grid Sequence -->
     <div class="featured-strip" id="galleryGrid">
       
-      <!-- 1. The Portrait Pic -->
-      <div class="feat-card" data-category="portrait">
+      <!-- Portrait Card -->
+      <div class="feat-card" data-category="captured">
         <div class="feat-thumb js-lightbox-trigger">
-          <img src="img/portrait.jpg" alt="Portrait Studio Session" style="width:100%; height:100%; object-fit:cover;">
+          <img src="img/portrait.jpg" alt="Portrait Capture Study" style="width:100%; height:100%; object-fit:cover;">
         </div>
         <div class="feat-body">
           <span class="frame-tag">R.01 · Portrait</span>
-          <h4>Portrait Profile</h4>
+          <h4>Portrait Study Frame</h4>
         </div>
       </div>
 
-      <!-- 2. The Official Pic -->
-      <div class="feat-card" data-category="official">
+      <!-- Official Profile Card -->
+      <div class="feat-card" data-category="captured">
         <div class="feat-thumb js-lightbox-trigger">
-          <img src="img/official.jpg" alt="Official Corporate Profile" style="width:100%; height:100%; object-fit:cover;">
+          <img src="img/Official.jpg" alt="Official Frame Capture" style="width:100%; height:100%; object-fit:cover;">
         </div>
         <div class="feat-body">
           <span class="frame-tag">R.02 · Official</span>
-          <h4>Official Presentation</h4>
+          <h4>Official Master Frame</h4>
         </div>
       </div>
 
-      <!-- 3. The Rest (Example Creative Content) -->
-      <div class="feat-card" data-category="creative">
+      <!-- AI Enhanced Card -->
+      <div class="feat-card" data-category="render">
         <div class="feat-thumb js-lightbox-trigger">
-          <img src="img/creative.jpg" alt="Creative Design Concept" style="width:100%; height:100%; object-fit:cover;">
+          <img src="img/Aienhanced.png" alt="AI Enhanced Visual Synthesis" style="width:100%; height:100%; object-fit:cover;">
         </div>
         <div class="feat-body">
-          <span class="frame-tag">R.03 · Creative</span>
-          <h4>Experimental Atmosphere</h4>
+          <span class="frame-tag">R.03 · AI Enhanced</span>
+          <h4>AI Enhanced Synthesis</h4>
+        </div>
+      </div>
+
+      <!-- Automation Card -->
+      <div class="feat-card" data-category="render">
+        <div class="feat-thumb js-lightbox-trigger">
+          <img src="img/automation.jpg" alt="Automated Network Systems" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="feat-body">
+          <span class="frame-tag">R.04 · Automation</span>
+          <h4>Automation Processing</h4>
+        </div>
+      </div>
+
+      <!-- BIM Card -->
+      <div class="feat-card" data-category="render">
+        <div class="feat-thumb js-lightbox-trigger">
+          <img src="img/BIM.jpg" alt="Building Information Modeling Data" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="feat-body">
+          <span class="frame-tag">R.05 · BIM</span>
+          <h4>Building Information Model</h4>
+        </div>
+      </div>
+
+      <!-- Edwards Concept Card -->
+      <div class="feat-card" data-category="identity">
+        <div class="feat-thumb js-lightbox-trigger">
+          <img src="img/edwards.png" alt="Edwards Brand Core" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="feat-body">
+          <span class="frame-tag">R.06 · Edwards Core</span>
+          <h4>Edwards System Concept</h4>
+        </div>
+      </div>
+
+      <!-- Egraphics Logo Card -->
+      <div class="feat-card" data-category="identity">
+        <div class="feat-thumb js-lightbox-trigger">
+          <img src="img/Egraphikslogo.png" alt="Egraphics Brand Identity Asset" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="feat-body">
+          <span class="frame-tag">R.07 · Egraphics</span>
+          <h4>Egraphics Vector Architecture</h4>
+        </div>
+      </div>
+
+      <!-- Lish Creative Card -->
+      <div class="feat-card" data-category="captured">
+        <div class="feat-thumb js-lightbox-trigger">
+          <img src="img/Lish.jpg" alt="Lish Environmental Composition" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="feat-body">
+          <span class="frame-tag">R.08 · Lish Frame</span>
+          <h4>Lish Structural Form</h4>
+        </div>
+      </div>
+
+      <!-- Photoshop Asset Card -->
+      <div class="feat-card" data-category="render">
+        <div class="feat-thumb js-lightbox-trigger">
+          <img src="img/Photoshop.jpg" alt="Photoshop Layer Architecture" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="feat-body">
+          <span class="frame-tag">R.09 · Photoshop</span>
+          <h4>Photoshop Matrix Space</h4>
         </div>
       </div>
 
@@ -229,7 +296,7 @@ footer{border-top:1px solid var(--line); padding:3.5rem 0 2.5rem; margin-top:5re
   </div>
 </section>
 
-<!-- Lightbox Modal Target Nodes -->
+<!-- Lightbox Modal Nodes -->
 <div class="fancy-lightbox" id="fancyLightbox">
   <button class="lightbox-close" id="lightboxClose">Close &times;</button>
   <img src="" alt="" class="lightbox-content" id="lightboxTargetImg">
@@ -245,7 +312,7 @@ footer{border-top:1px solid var(--line); padding:3.5rem 0 2.5rem; margin-top:5re
 </footer>
 
 <script>
-// Lightbox Implementation
+// Lightbox Core Engine Implementation
 document.addEventListener('DOMContentLoaded', () => {
   const lightbox = document.getElementById('fancyLightbox');
   const targetImg = document.getElementById('lightboxTargetImg');
@@ -271,7 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 });
 
-// Dynamic Gallery Sorting Engine Logic
+// Dynamic Gallery Filtering Engine Logic
 document.addEventListener('DOMContentLoaded', () => {
   const filterButtons = document.querySelectorAll('.filter-btn');
   const cards = document.querySelectorAll('.feat-card');
