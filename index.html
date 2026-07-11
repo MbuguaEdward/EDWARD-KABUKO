@@ -72,16 +72,11 @@ button{font-family:inherit;cursor:pointer;}
   pointer-events: none;
 }
 
-/* Ultimate Hyper-Expressive Entrance Animations */
 @keyframes fancyEntrance {
   0% {
     opacity: 0;
     transform: translateY(50px) scale(0.93) rotateX(15deg);
     filter: blur(20px);
-  }
-  40% {
-    opacity: 0.6;
-    filter: blur(8px);
   }
   100% {
     opacity: 1;
@@ -129,7 +124,6 @@ p{margin:0 0 1.2em; color:var(--ink-soft);}
 }
 .eyebrow::before{content:"";width:16px;height:1px;background:var(--line);display:inline-block;}
 
-/* Expressive Fluid Text Gradient */
 .grad-text {
   background: linear-gradient(135deg, var(--neon-violet) 0%, var(--neon-pink) 35%, var(--neon-cyan) 70%, var(--neon-violet) 100%);
   background-size: 200% auto;
@@ -252,6 +246,7 @@ section{padding:6rem 0;}
 }
 .feat-thumb{
   aspect-ratio:16/10; background:var(--paper-3); position:relative; overflow:hidden;
+  cursor: pointer;
   background-image: repeating-linear-gradient(45deg, var(--line-soft) 0, var(--line-soft) 1px, transparent 1px, transparent 12px);
 }
 .feat-card .feat-body{padding:1.4rem;}
@@ -264,6 +259,50 @@ section{padding:6rem 0;}
   border-color: rgba(6, 182, 212, 0.5);
   transform: translateY(-6px) scale(1.01);
   box-shadow: 0 22px 40px -10px rgba(6, 182, 212, 0.15);
+}
+
+/* ===================================================================
+   HYPER-EXPRESSIVE PHOTOGRAPHY LIGHTBOX OVERLAY
+=================================================================== */
+.fancy-lightbox {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(5, 5, 8, 0.92);
+  backdrop-filter: blur(25px);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 2rem;
+}
+.fancy-lightbox.active {
+  opacity: 1; pointer-events: auto;
+}
+.lightbox-content {
+  max-width: 85vw; max-height: 75vh;
+  transform: scale(0.9) translateY(30px);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 8px;
+  box-shadow: 0 30px 70px rgba(168, 85, 247, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  object-fit: contain;
+}
+.fancy-lightbox.active .lightbox-content {
+  transform: scale(1) translateY(0);
+}
+.lightbox-close {
+  position: absolute; top: 30px; right: 40px;
+  background: none; border: none; color: var(--ink-soft);
+  font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 0.5em 1em;
+  border: 1px solid var(--line); border-radius: 4px;
+  transition: all 0.3s ease;
+}
+.lightbox-close:hover {
+  color: var(--ink); border-color: var(--ink);
+  box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
+}
+.lightbox-caption {
+  margin-top: 1.5rem; font-family: var(--font-display);
+  font-size: 1.2rem; color: var(--ink); text-align: center;
 }
 
 /* ===================== FOOTER ===================== */
@@ -318,7 +357,7 @@ footer{border-top:1px solid var(--line); padding:3.5rem 0 2.5rem; margin-top:5re
 <!-- Hero Concept Frame -->
 <header class="hero">
   <div class="container">
-    <div class="eyebrow">F // Civil Structures &amp; Modern Digital Architecture</div>
+    <div class="eyebrow">F.00 // Civil Systems &amp; Modern Digital Architecture</div>
     <h1>
       <span class="hero-node stagger-1">Hi, I'm Edward Kabuko,</span> <br>
       <span class="hero-node stagger-2">bridging physical structures with</span> <br>
@@ -358,7 +397,7 @@ footer{border-top:1px solid var(--line); padding:3.5rem 0 2.5rem; margin-top:5re
   </div>
 </section>
 
-<!-- Projects Showcase -->
+<!-- Projects Showcase (Photography Section Items trigger Lightbox) -->
 <section style="border-top: 1px solid var(--line);">
   <div class="container">
     <div class="section-head" style="margin-bottom: 3.5rem;">
@@ -368,8 +407,8 @@ footer{border-top:1px solid var(--line); padding:3.5rem 0 2.5rem; margin-top:5re
 
     <div class="featured-strip">
       <div class="feat-card">
-        <div class="feat-thumb">
-          <img src="img/automation.jpg" alt="Digital Site Interface" style="width:100%; height:100%; object-fit:cover;">
+        <div class="feat-thumb js-lightbox-trigger">
+          <img src="img/automation.jpg" alt="Digital Site Infrastructure" style="width:100%; height:100%; object-fit:cover;">
         </div>
         <div class="feat-body">
           <span class="frame-tag">R.01 · Automation</span>
@@ -379,8 +418,8 @@ footer{border-top:1px solid var(--line); padding:3.5rem 0 2.5rem; margin-top:5re
       </div>
 
       <div class="feat-card">
-        <div class="feat-thumb">
-          <img src="img/Digital.jpg" alt="Smart City Infrastructure Map" style="width:100%; height:100%; object-fit:cover;">
+        <div class="feat-thumb js-lightbox-trigger">
+          <img src="img/Digital.jpg" alt="Intelligent Urban Grid" style="width:100%; height:100%; object-fit:cover;">
         </div>
         <div class="feat-body">
           <span class="frame-tag">R.02 · Smart Cities</span>
@@ -390,8 +429,8 @@ footer{border-top:1px solid var(--line); padding:3.5rem 0 2.5rem; margin-top:5re
       </div>
 
       <div class="feat-card">
-        <div class="feat-thumb">
-          <img src="img/Twin.jpg" alt="Digital Twin System Workspace" style="width:100%; height:100%; object-fit:cover;">
+        <div class="feat-thumb js-lightbox-trigger">
+          <img src="img/Twin.jpg" alt="Industrial Process Mirror" style="width:100%; height:100%; object-fit:cover;">
         </div>
         <div class="feat-body">
           <span class="frame-tag">R.03 · Digital Twin</span>
@@ -402,6 +441,13 @@ footer{border-top:1px solid var(--line); padding:3.5rem 0 2.5rem; margin-top:5re
     </div>
   </div>
 </section>
+
+<!-- High-Fancy Expressive Lightbox Structural Nodes -->
+<div class="fancy-lightbox" id="fancyLightbox">
+  <button class="lightbox-close" id="lightboxClose">Close &times;</button>
+  <img src="" alt="" class="lightbox-content" id="lightboxTargetImg">
+  <div class="lightbox-caption" id="lightboxCaption">Caption Text</div>
+</div>
 
 <!-- Footer Interface -->
 <footer>
@@ -425,6 +471,39 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Photography Tab Specific Lightbox Engine Actions
+document.addEventListener('DOMContentLoaded', () => {
+  const lightbox = document.getElementById('fancyLightbox');
+  const targetImg = document.getElementById('lightboxTargetImg');
+  const caption = document.getElementById('lightboxCaption');
+  const closeBtn = document.getElementById('lightboxClose');
+  const triggers = document.querySelectorAll('.js-lightbox-trigger');
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const img = trigger.querySelector('img');
+      if (img) {
+        targetImg.src = img.src;
+        targetImg.alt = img.alt;
+        caption.textContent = img.alt;
+        lightbox.classList.add('active');
+      }
+    });
+  });
+
+  const closeLightbox = () => {
+    lightbox.classList.remove('active');
+  };
+
+  closeBtn.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+});
+
 // Premium Hyper-Expressive "tneosm" Symmetrical Multi-Orbit Spindle Machine
 document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('tneosmSpindleBackdrop');
@@ -441,7 +520,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', setSize);
   setSize();
 
-  // Amplified cursor parallax tracking for hyper-expressive movement
   window.addEventListener('mousemove', (e) => {
     mouse.targetX = (e.clientX - canvas.width / 2) * 0.28;
     mouse.targetY = (e.clientY - canvas.height / 2) * 0.28;
@@ -450,18 +528,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function drawTneosmSpindle() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Organic spring-like easing for mouse physics
     mouse.x += (mouse.targetX - mouse.x) * 0.06;
     mouse.y += (mouse.targetY - mouse.y) * 0.06;
 
-    // Accelerated evolution factor for a more expressive pulse rate
     time += 0.0045;
 
-    // Rigidly locked to the top right quadrant throughout window dimensions
     const centerX = canvas.width * 0.78 + mouse.x;
     const centerY = canvas.height * 0.30 + mouse.y;
 
-    // Enhanced fidelity: 64 distinct mathematical vector paths
     const ribCount = 64; 
     const pointsPerRib = 70;
     const maxRadius = Math.min(canvas.width, canvas.height) * 0.48;
@@ -469,7 +543,6 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < ribCount; i++) {
       const normRib = i / ribCount;
       
-      // Complex double-wave mathematical pinch matrix for extreme elegance
       const pinchWave = Math.sin(time * 2.0 + normRib * Math.PI * 3.0) * 35;
       const radius = maxRadius * (0.10 + normRib * 0.90) + pinchWave;
 
@@ -478,14 +551,11 @@ document.addEventListener('DOMContentLoaded', () => {
       for (let j = 0; j < pointsPerRib; j++) {
         const normPt = j / pointsPerRib;
         
-        // Multi-layered harmonic spindle geometry equations
         const angle = normPt * Math.PI * 2 + (time * (0.8 + (1 - normRib) * 1.1));
 
-        // High-expressive infinity visual warp model
         const xRaw = Math.cos(angle) * radius;
         const yRaw = Math.sin(angle * 2.5) * (radius * 0.42); 
 
-        // Live complex rotation matrix to generate beautiful spatial depth curves
         const tilt = 0.68 + Math.cos(time * 0.4 + normRib * 0.5) * 0.12;
         const xRotated = xRaw * Math.cos(tilt) - yRaw * Math.sin(tilt);
         const yRotated = xRaw * Math.sin(tilt) + yRaw * Math.cos(tilt);
@@ -502,7 +572,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       ctx.closePath();
 
-      // Premium Hyper-Vivid Dynamic Palette Cycle (Violet -> Pink -> Cyan -> Violet)
       const colorProgress = Math.sin(time * 1.5 + normRib * Math.PI * 2.5) * 0.5 + 0.5;
       
       let rColor, gColor, bColor;
@@ -523,7 +592,6 @@ document.addEventListener('DOMContentLoaded', () => {
         bColor = Math.floor(212 + (247 - 212) * ratio);
       }
 
-      // Layered alpha mapping creating glowing holographic fields
       const dynamicAlpha = (0.015 + normRib * 0.14) * (0.35 + Math.sin(time * 2.5 + normRib * 5.0) * 0.45);
 
       ctx.strokeStyle = `rgba(${rColor}, ${gColor}, ${bColor}, ${Math.max(0.005, Math.min(0.28, dynamicAlpha))})`;
