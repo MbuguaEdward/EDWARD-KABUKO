@@ -8,33 +8,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ===================================================================
-   DESIGN TOKENS
-   Concept: "Blueprint & Darkroom" — engineering drafting meets film
-   photography. Cyanotype blue = engineering. Darkroom amber = photo.
+   DESIGN TOKENS & SYSTEM BASE
 =================================================================== */
 :root{
   --ink:#F3F3F6;
   --ink-soft:#B7B7C2;
-  --muted:#84848F;
-  --paper:#08080B;
-  --paper-2:#131318;
-  --paper-3:#1C1C23;
-  --white:#141419;
-  --line:rgba(255,255,255,0.11);
-  --line-soft:rgba(255,255,255,0.06);
-  --blue:#8B5CF6;
-  --blue-deep:#B9A2FF;
-  --blue-tint:rgba(139,92,246,0.14);
-  --amber:#FF7A45;
-  --amber-deep:#FFA36B;
-  --amber-tint:rgba(255,122,69,0.14);
-
+  --muted:#62626C;
+  --paper:#050508;
+  --paper-2:#0B0B11;
+  --paper-3:#12121A;
+  --white:#0F0F15;
+  --line:rgba(255,255,255,0.08);
+  --line-soft:rgba(255,255,255,0.03);
+  
+  /* tneosm Inspired Color Way - Deep Electric Universe */
+  --neon-violet:#A855F7;
+  --neon-pink:#EC4899;
+  --neon-cyan:#06B6D4;
+  
   --font-display:'Space Grotesk', sans-serif;
   --font-body:'Inter', -apple-system, sans-serif;
   --font-mono:'JetBrains Mono', monospace;
 
   --max:1180px;
-  --gap:2rem;
 }
 
 *{box-sizing:border-box;}
@@ -44,49 +40,47 @@ body{
   background:var(--paper);
   color:var(--ink);
   font-family:var(--font-body);
-  font-size:17px;
-  line-height:1.65;
+  font-size:16px;
+  line-height:1.6;
   -webkit-font-smoothing:antialiased;
   overflow-x: hidden;
 }
-img{max-width:100%;display:block;}
 a{color:inherit;text-decoration:none;}
 ul{list-style:none;margin:0;padding:0;}
 button{font-family:inherit;cursor:pointer;}
 
 .container{max-width:var(--max);margin:0 auto;padding:0 6vw;}
 
-/* subtle blueprint grid watermark behind everything */
+/* Background Watermark Blueprint Grid */
 .grid-bg{
-  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  position:fixed;inset:0;z-index:-2;pointer-events:none;
   background-image:
     linear-gradient(var(--line-soft) 1px, transparent 1px),
     linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
-  background-size:64px 64px;
-  opacity:0.25;
-  mask-image:linear-gradient(to bottom, black, transparent 70%);
+  background-size:50px 50px;
+  opacity:0.4;
+  mask-image:radial-gradient(circle at 75% 25%, black 20%, transparent 80%);
 }
 
 /* ===================================================================
-   CINEMATIC VORTEX LAYER (Inspired by theosm)
+   HIGH-FANCY MOTION LAYER (tneosm Symmetrical Cosmic Spindle)
 =================================================================== */
-.vortex-canvas-layer {
+.tneosm-canvas-backdrop {
   position: fixed;
   inset: 0;
-  z-index: -15;
+  z-index: -1;
   pointer-events: none;
-  opacity: 0.85;
 }
 
-@keyframes fancyReveal {
+@keyframes fancyEntrance {
   0% {
     opacity: 0;
-    transform: scale(0.96) translateY(40px);
-    filter: blur(15px);
+    transform: translateY(30px) scale(0.98);
+    filter: blur(10px);
   }
   100% {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: translateY(0) scale(1);
     filter: blur(0);
   }
 }
@@ -94,48 +88,48 @@ button{font-family:inherit;cursor:pointer;}
 .hero-node {
   display: inline-block;
   opacity: 0;
-  animation: fancyReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fancyEntrance 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+.stagger-1 { animation-delay: 0.15s; }
+.stagger-2 { animation-delay: 0.3s; }
+.stagger-3 { animation-delay: 0.45s; }
 
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.25s; }
-.stagger-3 { animation-delay: 0.4s; }
-
-/* ===================== TYPE ===================== */
+/* ===================== TYPOGRAPHY ===================== */
 h1,h2,h3,h4{
   font-family:var(--font-display);
   font-weight:500;
   letter-spacing:-0.01em;
-  margin:0 0 0.6em;
+  margin:0 0 0.5em;
   color:var(--ink);
 }
-h1{font-size:clamp(2.6rem, 5vw, 4.5rem); line-height:1.05; letter-spacing:-0.02em;}
-h2{font-size:clamp(1.7rem, 3.4vw, 2.6rem); line-height:1.1;}
-h3{font-size:1.3rem;}
-p{margin:0 0 1.1em;}
+h1{font-size:clamp(2.5rem, 5.2vw, 4.4rem); line-height:1.1; letter-spacing:-0.02em;}
+h2{font-size:clamp(1.8rem, 3.5vw, 2.5rem); line-height:1.15;}
+h3{font-size:1.25rem;}
+p{margin:0 0 1.2em; color:var(--ink-soft);}
+
 .eyebrow{
   font-family:var(--font-mono);
-  font-size:0.78rem;
-  letter-spacing:0.08em;
+  font-size:0.75rem;
+  letter-spacing:0.1em;
   text-transform:uppercase;
   color:var(--muted);
-  display:flex;align-items:center;gap:0.6em;
-  margin-bottom:0.9em;
+  display:flex;align-items:center;gap:0.7em;
+  margin-bottom:1.2em;
 }
-.eyebrow::before{content:"";width:22px;height:1px;background:var(--line);display:inline-block;}
-.frame-tag{
-  font-family:var(--font-mono);
-  font-size:0.72rem;
-  color:var(--muted);
-  letter-spacing:0.04em;
-}
-.lede{font-size:1.2rem; color:var(--ink-soft); max-width:760px;}
+.eyebrow::before{content:"";width:16px;height:1px;background:var(--line);display:inline-block;}
 
-/* ===================== NAV ===================== */
+.grad-text {
+  background:linear-gradient(135deg, var(--neon-violet) 0%, var(--neon-pink) 50%, var(--neon-cyan) 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+
+.lede{font-size:1.15rem; max-width:740px; line-height:1.7;}
+
+/* ===================== HEADER NAV ===================== */
 .site-nav{
-  position:sticky; top:0; z-index:50;
-  background:rgba(8,8,11,0.72);
-  backdrop-filter:blur(14px);
+  position:sticky; top:0; z-index:100;
+  background:rgba(5,5,8,0.75);
+  backdrop-filter:blur(20px);
   border-bottom:1px solid var(--line);
 }
 .site-nav .container{
@@ -144,113 +138,101 @@ p{margin:0 0 1.1em;}
 }
 .brand{
   font-family:var(--font-mono);
-  font-size:1rem; font-weight:500; letter-spacing:0.02em;
-  display:flex; align-items:center; gap:0.5em;
+  font-size:0.95rem; font-weight:500; letter-spacing:0.05em;
+  display:flex; align-items:center; gap:0.6em;
 }
-.brand .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);display:inline-block;}
-.nav-links{display:flex; gap:2.1rem; align-items:center;}
+.brand .status-orb {
+  width:6px; height:6px; border-radius:50%;
+  background:var(--neon-pink);
+  box-shadow: 0 0 10px var(--neon-pink);
+}
+.nav-links{display:flex; gap:2.2rem;}
 .nav-links a{
-  font-family:var(--font-mono); font-size:0.82rem; letter-spacing:0.03em;
-  color:var(--ink-soft); position:relative; padding:0.3em 0;}
-.nav-links a.active, .nav-links a:hover{color:var(--ink);}
+  font-family:var(--font-mono); font-size:0.8rem; letter-spacing:0.04em;
+  color:var(--ink-soft); position:relative; padding:0.4em 0;
+  transition: color 0.25s ease;
+}
+.nav-links a:hover, .nav-links a.active{color:var(--ink);}
 .nav-links a.active::after{
-  content:""; position:absolute; left:0; right:0; bottom:-2px; height:2px; background:var(--blue);
+  content:""; position:absolute; left:0; right:0; bottom:-2px; height:1px; 
+  background:linear-gradient(90deg, var(--neon-violet), var(--neon-pink));
 }
 .nav-cta{
-  font-family:var(--font-mono); font-size:0.78rem;
-  border:1px solid var(--ink); padding:0.55em 1.1em; border-radius:2px;
-  transition:background .18s, color .18s;
+  font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.05em;
+  border:1px solid var(--line); padding:0.6em 1.3rem; border-radius:4px;
+  background: rgba(255,255,255,0.02); transition: all 0.2s ease;
 }
-.nav-cta:hover{background:var(--ink); color:var(--white);}
-.nav-toggle{display:none; background:none; border:none; color:var(--ink); font-size:1.5rem;}
+.nav-cta:hover{ border-color:var(--ink); background:var(--ink); color:var(--paper); }
+.nav-toggle{display:none; background:none; border:none; color:var(--ink); font-size:1.4rem;}
 
-/* ===================== BUTTONS ===================== */
+/* ===================== CONTROLS & INTERFACE ===================== */
 .btn{
-  display:inline-flex; align-items:center; gap:0.5em;
-  font-family:var(--font-mono); font-size:0.82rem; letter-spacing:0.02em;
-  padding:0.85em 1.5em; border-radius:2px; border:1px solid var(--ink);
-  transition:all .18s ease;
+  display:inline-flex; align-items:center; gap:0.6em;
+  font-family:var(--font-mono); font-size:0.8rem; letter-spacing:0.03em;
+  padding:0.9em 1.8rem; border-radius:4px; transition:all .25s ease;
 }
 .btn-primary{
-  background:linear-gradient(100deg, var(--blue) 0%, #B27CFF 55%, var(--amber) 100%);
-  color:#0A0A0D; border-color:transparent; font-weight:500;
+  background: var(--ink); color: var(--paper); font-weight: 500; border:1px solid var(--ink);
 }
-.btn-primary:hover{filter:brightness(1.1);}
-.btn-ghost{background:transparent; color:var(--ink);}
-.btn-ghost:hover{background:var(--ink); color:var(--white);}
+.btn-primary:hover{ background: transparent; color: var(--ink); }
+.btn-ghost{ border:1px solid var(--line); color:var(--ink); background: rgba(255,255,255,0.01); }
+.btn-ghost:hover{ border-color: var(--ink); background: rgba(255,255,255,0.04); }
 
-/* ===================== SECTIONS ===================== */
-section{padding:5.5rem 0;}
-.section-head{
-  margin-bottom:3rem;
-}
+/* ===================== STRUCTURAL LAYOUTS ===================== */
+section{padding:6rem 0;}
+.hero{padding-top:7rem; padding-bottom:6rem;}
+.hero-actions{display:flex; gap:1.2rem; margin-top:2.8rem; flex-wrap:wrap;}
 
-/* ===================== HERO ===================== */
-.hero{padding-top:6rem; padding-bottom:5rem;}
-.hero-actions{display:flex; gap:1rem; margin-top:2.5rem; flex-wrap:wrap;}
-
-/* ===================== SPLIT TEASERS ===================== */
+/* Teaser Router Blocks */
 .teasers{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); margin-top:2rem;}
 .teaser{
-  background:var(--paper); padding:2.6rem 2.2rem; position:relative;
-  transition:background .2s;
-  min-height:260px; display:flex; flex-direction:column; justify-content:space-between;
+  background:var(--paper); padding:2.8rem 2.4rem; min-height:270px;
+  display:flex; flex-direction:column; justify-content:space-between;
+  transition:background 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .teaser:hover{background:var(--paper-2);}
-.teaser .num{font-family:var(--font-mono); color:var(--muted); font-size:0.8rem;}
-.teaser h3{margin-top:1rem; font-size:1.4rem;}
-.teaser p{font-size:0.92rem; color:var(--ink-soft); margin-bottom:0;}
+.teaser .num{font-family:var(--font-mono); color:var(--muted); font-size:0.75rem;}
+.teaser h3{margin-top:1.2rem; font-size:1.35rem;}
+.teaser p{font-size:0.9rem; margin-bottom:0;}
 .teaser .tag{
-  font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.05em;
-  text-transform:uppercase; padding:0.3em 0.7em; border:1px solid var(--line);
-  display:inline-block; margin-top:1.2rem; width:fit-content;
+  font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.06em;
+  text-transform:uppercase; padding:0.4em 0.8em; border:1px solid var(--line);
+  display:inline-block; margin-top:1.5rem; width:fit-content; border-radius:2px;
+  transition: all 0.2s ease;
 }
-.teaser.eng .tag{border-color:var(--blue); color:var(--blue-deep);}
-.teaser.photo .tag{border-color:var(--amber); color:var(--amber-deep);}
-.teaser.blog .tag{border-color:var(--ink-soft); color:var(--ink-soft);}
+.teaser:hover .tag{ border-color: var(--ink-soft); }
 
-/* ===================== FEATURED GRID ===================== */
-.featured-strip{display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem;}
-.feat-card{border:1px solid var(--line); background:var(--white); overflow:hidden;}
-.feat-thumb{aspect-ratio:16/10; background:var(--paper-2); position:relative; overflow:hidden;}
-.feat-card .feat-body{padding:1.3rem 1.4rem;}
-.feat-card h4{font-size:1.15rem; margin:0.4em 0 0.4em;}
-.feat-card p{color:var(--ink-soft); font-size:0.9rem; margin-bottom:0;}
-.feat-card .frame-tag{display:block; margin-bottom:0.2rem;}
+/* Grid Project Showcases */
+.featured-strip{display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem;}
+.feat-card{
+  border:1px solid var(--line); background:var(--white); 
+  border-radius:6px; overflow:hidden;
+  transition:border-color 0.3s ease, transform 0.3s ease;
+}
+.feat-thumb{
+  aspect-ratio:16/10; background:var(--paper-3); position:relative; overflow:hidden;
+  background-image: repeating-linear-gradient(45deg, var(--line-soft) 0, var(--line-soft) 1px, transparent 1px, transparent 12px);
+}
+.feat-card .feat-body{padding:1.4rem;}
+.feat-card h4{font-size:1.1rem; margin:0.3em 0 0.5em;}
+.feat-card h4 a:hover{ color: var(--neon-pink); }
+.feat-card p{font-size:0.88rem; margin-bottom:0;}
+.feat-card .frame-tag{font-family:var(--font-mono); font-size:0.7rem; color:var(--muted); display:block;}
+
+.feat-card:hover{
+  border-color: rgba(168, 85, 247, 0.4);
+  transform: translateY(-2px);
+}
 
 /* ===================== FOOTER ===================== */
-footer{border-top:1px solid var(--line); padding:3.4rem 0 2.2rem; margin-top:4rem;}
+footer{border-top:1px solid var(--line); padding:3.5rem 0 2.5rem; margin-top:5rem;}
 .foot-bottom{
   display:flex; justify-content:space-between; align-items:center;
   font-family:var(--font-mono); font-size:0.75rem; color:var(--muted);
-  flex-wrap:wrap; gap:0.8rem;
+  flex-wrap:wrap; gap:1rem;
 }
 
-/* ===================== SYSTEMS & GLOWS ===================== */
-.hatch{
-  background-image: repeating-linear-gradient(45deg, var(--line-soft) 0, var(--line-soft) 1px, transparent 1px, transparent 13px);
-}
-.glow-field{ position:fixed; inset:0; z-index:-2; pointer-events:none; overflow:hidden; }
-.glow{ position:absolute; border-radius:50%; filter:blur(110px); pointer-events:none; }
-.glow-a{ width:700px; height:700px; top:-250px; left:-180px; background:radial-gradient(circle, rgba(139,92,246,0.22), transparent 70%); }
-.glow-b{ width:600px; height:600px; top:-100px; right:-250px; background:radial-gradient(circle, rgba(255,122,69,0.15), transparent 70%); }
-
-.grad{
-  background:linear-gradient(100deg, var(--blue) 0%, #C9A6FF 45%, var(--amber) 100%);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-}
-body::before{
-  content:""; position:fixed; inset:0; z-index:-3; pointer-events:none;
-  background:radial-gradient(ellipse at 50% -10%, rgba(139,92,246,0.06), transparent 60%);
-}
-.feat-card{ transition:border-color .2s, box-shadow .2s; }
-.feat-card:hover{
-  border-color:rgba(139,92,246,0.4);
-  box-shadow:0 0 0 1px rgba(139,92,246,0.1), 0 12px 40px -12px rgba(139,92,246,0.2);
-}
-.brand .dot{background:linear-gradient(135deg, var(--blue), var(--amber)); box-shadow:0 0 8px rgba(139,92,246,0.7);}
-
-/* ===================== RESPONSIVE ===================== */
+/* ===================== MOBILE ADAPTATION ===================== */
 @media (max-width:980px){
   .teasers{grid-template-columns:1fr;}
   .featured-strip{grid-template-columns:repeat(2,1fr);}
@@ -258,8 +240,8 @@ body::before{
 @media (max-width:640px){
   .nav-links{
     position:fixed; top:76px; left:0; right:0; background:var(--paper);
-    flex-direction:column; align-items:flex-start; padding:1.5rem 6vw;
-    border-bottom:1px solid var(--line); display:none; gap:1.2rem;
+    flex-direction:column; padding:2rem 6vw; border-bottom:1px solid var(--line);
+    display:none; gap:1.5rem;
   }
   .nav-links.open{display:flex;}
   .nav-cta{display:none;}
@@ -270,16 +252,15 @@ body::before{
 </head>
 <body>
 
-<!-- Reimagined Mathematical Kinetic Spindle Canvas -->
-<canvas class="vortex-canvas-layer" id="theosmGeometricVortex"></canvas>
+<!-- High-Fancy tneosm Mathematical Symmetrical Spindle Canvas Backdrop -->
+<canvas class="tneosm-canvas-backdrop" id="tneosmSpindleBackdrop"></canvas>
 
 <div class="grid-bg"></div>
-<div class="glow-field"><div class="glow glow-a"></div><div class="glow glow-b"></div></div>
 
-<!-- Main Navigation -->
+<!-- Main Navigation Header -->
 <nav class="site-nav">
   <div class="container">
-    <a href="index.html" class="brand"><span class="dot"></span>E. Edwards</a>
+    <a href="index.html" class="brand"><span class="status-orb"></span>E. Edwards</a>
     <ul class="nav-links">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="about.html">About</a></li>
@@ -287,19 +268,19 @@ body::before{
       <li><a href="photography.html">Photography</a></li>
       <li><a href="blog.html">Blog</a></li>
     </ul>
-    <a href="contact.html" class="nav-cta">Let's talk</a>
-    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <a href="contact.html" class="nav-cta">Initiate Session</a>
+    <button class="nav-toggle" aria-label="Toggle Navigation Menu">☰</button>
   </div>
 </nav>
 
-<!-- Hero Presentation Block -->
+<!-- Hero Concept Frame -->
 <header class="hero">
   <div class="container">
-    <div class="eyebrow">F.00 — Civil Engineer / Designer / ML Engineer</div>
+    <div class="eyebrow">F.00 // Civil Systems &amp; Modern Digital Architecture</div>
     <h1>
       <span class="hero-node stagger-1">Hi, I'm Edward Kabuko,</span> <br>
       <span class="hero-node stagger-2">bridging physical structures with</span> <br>
-      <span class="hero-node stagger-3"><span class="grad">intelligent digital frameworks</span>.</span>
+      <span class="hero-node stagger-3"><span class="grad-text">intelligent digital frameworks</span>.</span>
     </h1>
     <p class="lede">Civil Engineering student at Meru University of Science and Technology with a deep drive for technology and layout design. I combine engineering domains with BIM styling, modern UI/UX workflows, and Machine Learning to build functional digital twins and interactive applications.</p>
     <div class="hero-actions">
@@ -309,44 +290,43 @@ body::before{
   </div>
 </header>
 
-<!-- Categories Split Router Section -->
+<!-- Split Routing Gateways -->
 <section style="padding-top: 0;">
   <div class="container">
     <div class="teasers">
-      <div class="teaser eng">
-        <span class="num">01 // STRUCTURAL</span>
+      <div class="teaser">
+        <span class="num">01 // METRICS</span>
         <h3>Engineering</h3>
         <p>BIM design configurations, asset analytics data systems, and construction automation case files.</p>
-        <a href="engineering.html" class="tag">View Repository &rarr;</a>
+        <a href="engineering.html" class="tag">Explore Systems &rarr;</a>
       </div>
-      <div class="teaser photo">
-        <span class="num">02 // VISUAL</span>
+      <div class="teaser">
+        <span class="num">02 // LIGHTROOM</span>
         <h3>Photography</h3>
         <p>Capturing high-contrast architectural studies, landscape environments, and real-world framing perspective.</p>
         <a href="photography.html" class="tag">View Gallery &rarr;</a>
       </div>
-      <div class="teaser blog">
-        <span class="num">03 // INSIGHTS</span>
+      <div class="teaser">
+        <span class="num">03 // FIELD NOTES</span>
         <h3>Notebook</h3>
         <p>Documenting progress notes on machine learning applications, development experiments, and design guides.</p>
-        <a href="blog.html" class="tag">Read Articles &rarr;</a>
+        <a href="blog.html" class="tag">Read Entries &rarr;</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Featured Core Projects Layout Grid -->
+<!-- Projects Showcase -->
 <section style="border-top: 1px solid var(--line);">
   <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">Selected Work Cases</div>
-      <h2>Highlighted Systems</h2>
+    <div class="section-head" style="margin-bottom: 3.5rem;">
+      <div class="eyebrow">Case Index</div>
+      <h2>Selected Systems</h2>
     </div>
 
     <div class="featured-strip">
-      <!-- Card 1: Automation -->
       <div class="feat-card">
-        <div class="feat-thumb hatch">
+        <div class="feat-thumb">
           <img src="img/automation.jpg" alt="Digital Site Interface" style="width:100%; height:100%; object-fit:cover;">
         </div>
         <div class="feat-body">
@@ -356,9 +336,8 @@ body::before{
         </div>
       </div>
 
-      <!-- Card 2: Digital Twin -->
       <div class="feat-card">
-        <div class="feat-thumb hatch">
+        <div class="feat-thumb">
           <img src="img/Digital.jpg" alt="Smart City Infrastructure Map" style="width:100%; height:100%; object-fit:cover;">
         </div>
         <div class="feat-body">
@@ -368,9 +347,8 @@ body::before{
         </div>
       </div>
 
-      <!-- Card 3: Product Design / Twin -->
       <div class="feat-card">
-        <div class="feat-thumb hatch">
+        <div class="feat-thumb">
           <img src="img/Twin.jpg" alt="Digital Twin System Workspace" style="width:100%; height:100%; object-fit:cover;">
         </div>
         <div class="feat-body">
@@ -383,18 +361,18 @@ body::before{
   </div>
 </section>
 
-<!-- Footnote Interface Block -->
+<!-- Footer Interface -->
 <footer>
   <div class="container">
     <div class="foot-bottom">
-      <span>© 2026 Edward Kabuko. All rights reserved.</span>
-      <a href="contact.html">Discuss a project</a>
+      <span>© 2026 Edward Kabuko. Built for the Next Horizon.</span>
+      <a href="contact.html" style="color: var(--ink-soft);">Establish Connection</a>
     </div>
   </div>
 </footer>
 
 <script>
-// Handle responsive mobile navigation drawer toggle
+// Mobile Menu Trigger Logic
 document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.querySelector('.nav-toggle');
   const links = document.querySelector('.nav-links');
@@ -405,101 +383,115 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Reimagined Geometric Spindle Matrix Animation Framework
+// Premium High-Fancy "tneosm" Symmetrical Orbit Spindle Machine Architecture
 document.addEventListener('DOMContentLoaded', () => {
-  const canvas = document.getElementById('theosmGeometricVortex');
+  const canvas = document.getElementById('tneosmSpindleBackdrop');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
   let time = 0;
   let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
 
-  function resize() {
+  function setSize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   }
-  window.addEventListener('resize', resize);
-  resize();
+  window.addEventListener('resize', setSize);
+  setSize();
 
-  // Track cursor coordinates for interactive organic distortion fluid effects
+  // Subtle pointer feedback tracking
   window.addEventListener('mousemove', (e) => {
-    mouse.targetX = (e.clientX - canvas.width / 2) * 0.35;
-    mouse.targetY = (e.clientY - canvas.height / 2) * 0.35;
+    mouse.targetX = (e.clientX - canvas.width / 2) * 0.12;
+    mouse.targetY = (e.clientY - canvas.height / 2) * 0.12;
   });
 
-  function renderVortex() {
+  function drawTneosmSpindle() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Smooth cursor interpolation mechanics
-    mouse.x += (mouse.targetX - mouse.x) * 0.08;
-    mouse.y += (mouse.targetY - mouse.y) * 0.08;
+    // Smooth physics ease for mouse tracking
+    mouse.x += (mouse.targetX - mouse.x) * 0.05;
+    mouse.y += (mouse.targetY - mouse.y) * 0.05;
 
-    time += 0.0035;
+    time += 0.0025;
 
-    // Anchor geometry origin point close to your top right ambient glow framework
-    const centerX = canvas.width * 0.72 + mouse.x;
-    const centerY = canvas.height * 0.35 + mouse.y;
+    // Anchor the core directly at the top right quadrant throughout the entire window frame
+    const centerX = canvas.width * 0.76 + mouse.x;
+    const centerY = canvas.height * 0.32 + mouse.y;
 
-    const ringCount = 36;
-    const particlesPerRing = 45;
-    const baseRadius = Math.min(canvas.width, canvas.height) * 0.28;
+    // High fidelity layer counts to replicate dense luxury particle trails
+    const ribCount = 48; 
+    const pointsPerRib = 60;
+    const maxRadius = Math.min(canvas.width, canvas.height) * 0.42;
 
-    for (let r = 0; r < ringCount; r++) {
-      // Calculate depth metrics for genuine 3D spatial simulation
-      const normRadius = r / ringCount;
-      const currentRadius = baseRadius * (0.3 + normRadius * 0.7);
+    for (let i = 0; i < ribCount; i++) {
+      const normRib = i / ribCount;
       
-      // Phase shifts producing fluid wave motion patterns
-      const waveOffset = Math.sin(time * 2 + normRadius * Math.PI * 2.5) * 35;
-      
+      // Dynamic center pinch frequency logic mimicking tneosm design aesthetic
+      const pinchWave = Math.sin(time * 1.5 + normRib * Math.PI * 2) * 20;
+      const radius = maxRadius * (0.15 + normRib * 0.85) + pinchWave;
+
       ctx.beginPath();
 
-      for (let p = 0; p < particlesPerRing; p++) {
-        const angleNorm = p / particlesPerRing;
-        const angle = angleNorm * Math.PI * 2 + (time * (1.2 - normRadius * 0.5));
-
-        // Parametric spindle mathematics mapping
-        const x3D = Math.cos(angle) * (currentRadius + waveOffset);
-        const y3D = Math.sin(angle) * (currentRadius * 0.45 + waveOffset * 0.5);
+      for (let j = 0; j < pointsPerRib; j++) {
+        const normPt = j / pointsPerRib;
         
-        // Dynamic tilt rotation matrix configurations
-        const tiltAngle = 0.55 + Math.sin(time * 0.5) * 0.1;
-        const xRotated = x3D * Math.cos(tiltAngle) - y3D * Math.sin(tiltAngle);
-        const yRotated = x3D * Math.sin(tiltAngle) + y3D * Math.cos(tiltAngle);
+        // Symmetrical spindle coordinate generation equations
+        const angle = normPt * Math.PI * 2 + (time * (0.6 + (1 - normRib) * 0.8));
 
-        const screenX = centerX + xRotated;
-        const screenY = centerY + yRotated;
+        // Center-pinched hour-glass visual formula
+        const xRaw = Math.cos(angle) * radius;
+        const yRaw = Math.sin(angle * 2) * (radius * 0.38); // Symmetrical knot distortion
 
-        // Skip calculations occurring entirely offscreen
-        if (screenX < 0 || screenX > canvas.width || screenY < 0 || screenY > canvas.height) continue;
+        // Matrix rotation calculations to tilt the orbital path gracefully
+        const tilt = 0.65 + Math.cos(time * 0.3) * 0.05;
+        const xRotated = xRaw * Math.cos(tilt) - yRaw * Math.sin(tilt);
+        const yRotated = xRaw * Math.sin(tilt) + yRaw * Math.cos(tilt);
 
-        // Depth sorting opacity alpha values
-        const depthAlpha = (0.04 + normRadius * 0.16) * (0.4 + Math.sin(angle + time) * 0.6);
+        const finalX = centerX + xRotated;
+        const finalY = centerY + yRotated;
 
-        if (p === 0) {
-          ctx.moveTo(screenX, screenY);
+        // Skip render steps for metrics entirely out of bounds
+        if (finalX < -50 || finalX > canvas.width + 50 || finalY < -50 || finalY > canvas.height + 50) continue;
+
+        if (j === 0) {
+          ctx.moveTo(finalX, finalY);
         } else {
-          ctx.lineTo(screenX, screenY);
+          ctx.lineTo(finalX, finalY);
         }
       }
 
       ctx.closePath();
-      
-      // Interpolate lines dynamically between lavender and darkroom deep amber tones
-      const mixRatio = Math.sin(time + normRadius * Math.PI) * 0.5 + 0.5;
-      const red = Math.floor(139 + (255 - 139) * mixRatio);
-      const green = Math.floor(92 + (122 - 92) * mixRatio);
-      const blueColor = Math.floor(246 + (69 - 246) * mixRatio);
 
-      ctx.strokeStyle = `rgba(${red}, ${green}, ${blueColor}, ${depthAlpha})`;
-      ctx.lineWidth = 0.95 + (normRadius * 0.6);
+      // Premium Color-mix transitions (Neon Violet to Pink to Cyan palette)
+      const colorProgress = Math.sin(time + normRib * Math.PI * 2) * 0.5 + 0.5;
+      
+      let rColor, gColor, bColor;
+      if (colorProgress < 0.5) {
+        // Violet to Pink transition phase
+        const ratio = colorProgress * 2;
+        rColor = Math.floor(168 + (236 - 168) * ratio);
+        gColor = Math.floor(85 + (72 - 85) * ratio);
+        bColor = Math.floor(247 + (153 - 247) * ratio);
+      } else {
+        // Pink to Cyan transition phase
+        const ratio = (colorProgress - 0.5) * 2;
+        rColor = Math.floor(236 + (6 - 236) * ratio);
+        gColor = Math.floor(72 + (182 - 72) * ratio);
+        bColor = Math.floor(153 + (212 - 153) * ratio);
+      }
+
+      // High density opacity tuning for cinematic depth fading
+      const dynamicAlpha = (0.01 + normRib * 0.12) * (0.3 + Math.sin(time * 2 + normRib * 4) * 0.4);
+
+      ctx.strokeStyle = `rgba(${rColor}, ${gColor}, ${bColor}, ${Math.max(0, Math.min(1, dynamicAlpha))})`;
+      ctx.lineWidth = 0.8 + (normRib * 0.7);
       ctx.stroke();
     }
 
-    requestAnimationFrame(renderVortex);
+    requestAnimationFrame(drawTneosmSpindle);
   }
 
-  renderVortex();
+  drawTneosmSpindle();
 });
 </script>
 </body>
