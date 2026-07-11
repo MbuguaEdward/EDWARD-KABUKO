@@ -21,7 +21,7 @@
   --line:rgba(255,255,255,0.08);
   --line-soft:rgba(255,255,255,0.03);
   
-  /* tneosm Inspired Color Way - Cosmic Cyber Hybrid */
+  /* tneosm Inspired Color Way - Deep Electric Universe */
   --neon-violet:#A855F7;
   --neon-pink:#EC4899;
   --neon-cyan:#06B6D4;
@@ -72,38 +72,27 @@ button{font-family:inherit;cursor:pointer;}
   pointer-events: none;
 }
 
-/* Ultimate Hyper-Expressive Entrance Animations */
 @keyframes fancyEntrance {
   0% {
     opacity: 0;
-    transform: translateY(50px) scale(0.93) rotateX(15deg);
-    filter: blur(20px);
-  }
-  40% {
-    opacity: 0.6;
-    filter: blur(8px);
+    transform: translateY(30px) scale(0.98);
+    filter: blur(10px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1) rotateX(0deg);
+    transform: translateY(0) scale(1);
     filter: blur(0);
   }
-}
-
-@keyframes pulseGlow {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 15px var(--neon-pink)); }
 }
 
 .hero-node {
   display: inline-block;
   opacity: 0;
-  transform-origin: left center;
-  animation: fancyEntrance 1.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  animation: fancyEntrance 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.25s; }
-.stagger-3 { animation-delay: 0.4s; }
+.stagger-1 { animation-delay: 0.15s; }
+.stagger-2 { animation-delay: 0.3s; }
+.stagger-3 { animation-delay: 0.45s; }
 
 /* ===================== TYPOGRAPHY ===================== */
 h1,h2,h3,h4{
@@ -129,19 +118,9 @@ p{margin:0 0 1.2em; color:var(--ink-soft);}
 }
 .eyebrow::before{content:"";width:16px;height:1px;background:var(--line);display:inline-block;}
 
-/* Expressive Fluid Text Gradient */
 .grad-text {
-  background: linear-gradient(135deg, var(--neon-violet) 0%, var(--neon-pink) 35%, var(--neon-cyan) 70%, var(--neon-violet) 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text; 
-  background-clip: text; 
-  color: transparent;
-  animation: fluidShimmer 6s linear infinite;
-}
-
-@keyframes fluidShimmer {
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
+  background:linear-gradient(135deg, var(--neon-violet) 0%, var(--neon-pink) 50%, var(--neon-cyan) 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
 }
 
 .lede{font-size:1.15rem; max-width:740px; line-height:1.7;}
@@ -163,9 +142,9 @@ p{margin:0 0 1.2em; color:var(--ink-soft);}
   display:flex; align-items:center; gap:0.6em;
 }
 .brand .status-orb {
-  width:8px; height:8px; border-radius:50%;
+  width:6px; height:6px; border-radius:50%;
   background:var(--neon-pink);
-  animation: pulseGlow 2s infinite ease-in-out;
+  box-shadow: 0 0 10px var(--neon-pink);
 }
 .nav-links{display:flex; gap:2.2rem;}
 .nav-links a{
@@ -175,7 +154,7 @@ p{margin:0 0 1.2em; color:var(--ink-soft);}
 }
 .nav-links a:hover, .nav-links a.active{color:var(--ink);}
 .nav-links a.active::after{
-  content:""; position:absolute; left:0; right:0; bottom:-2px; height:2px; 
+  content:""; position:absolute; left:0; right:0; bottom:-2px; height:1px; 
   background:linear-gradient(90deg, var(--neon-violet), var(--neon-pink));
 }
 .nav-cta{
@@ -190,24 +169,14 @@ p{margin:0 0 1.2em; color:var(--ink-soft);}
 .btn{
   display:inline-flex; align-items:center; gap:0.6em;
   font-family:var(--font-mono); font-size:0.8rem; letter-spacing:0.03em;
-  padding:0.9em 1.8rem; border-radius:4px; transition:all .3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding:0.9em 1.8rem; border-radius:4px; transition:all .25s ease;
 }
 .btn-primary{
   background: var(--ink); color: var(--paper); font-weight: 500; border:1px solid var(--ink);
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
 }
-.btn-primary:hover{ 
-  background: transparent; 
-  color: var(--ink); 
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(255, 255, 255, 0.12);
-}
+.btn-primary:hover{ background: transparent; color: var(--ink); }
 .btn-ghost{ border:1px solid var(--line); color:var(--ink); background: rgba(255,255,255,0.01); }
-.btn-ghost:hover{ 
-  border-color: var(--ink); 
-  background: rgba(255,255,255,0.04);
-  transform: translateY(-2px);
-}
+.btn-ghost:hover{ border-color: var(--ink); background: rgba(255,255,255,0.04); }
 
 /* ===================== STRUCTURAL LAYOUTS ===================== */
 section{padding:6rem 0;}
@@ -219,36 +188,26 @@ section{padding:6rem 0;}
 .teaser{
   background:var(--paper); padding:2.8rem 2.4rem; min-height:270px;
   display:flex; flex-direction:column; justify-content:space-between;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
-  overflow: hidden;
+  transition:background 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.teaser::before {
-  content: ""; position: absolute; inset: 0; 
-  background: linear-gradient(135deg, rgba(168,85,247,0.05) 0%, rgba(236,72,153,0.05) 100%);
-  opacity: 0; transition: opacity 0.4s ease; z-index: 0;
-}
-.teaser:hover::before { opacity: 1; }
-.teaser:hover{ background:var(--paper-2); transform: translateY(-4px); z-index: 2; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-.teaser * { z-index: 1; }
+.teaser:hover{background:var(--paper-2);}
 .teaser .num{font-family:var(--font-mono); color:var(--muted); font-size:0.75rem;}
-.teaser h3{margin-top:1.2rem; font-size:1.35rem; transition: color 0.3s ease;}
-.teaser:hover h3 { color: var(--neon-cyan); }
+.teaser h3{margin-top:1.2rem; font-size:1.35rem;}
 .teaser p{font-size:0.9rem; margin-bottom:0;}
 .teaser .tag{
   font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.06em;
   text-transform:uppercase; padding:0.4em 0.8em; border:1px solid var(--line);
   display:inline-block; margin-top:1.5rem; width:fit-content; border-radius:2px;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
-.teaser:hover .tag{ border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.teaser:hover .tag{ border-color: var(--ink-soft); }
 
 /* Grid Project Showcases */
 .featured-strip{display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem;}
 .feat-card{
   border:1px solid var(--line); background:var(--white); 
   border-radius:6px; overflow:hidden;
-  transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  transition:border-color 0.3s ease, transform 0.3s ease;
 }
 .feat-thumb{
   aspect-ratio:16/10; background:var(--paper-3); position:relative; overflow:hidden;
@@ -261,9 +220,8 @@ section{padding:6rem 0;}
 .feat-card .frame-tag{font-family:var(--font-mono); font-size:0.7rem; color:var(--muted); display:block;}
 
 .feat-card:hover{
-  border-color: rgba(6, 182, 212, 0.5);
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 22px 40px -10px rgba(6, 182, 212, 0.15);
+  border-color: rgba(168, 85, 247, 0.4);
+  transform: translateY(-2px);
 }
 
 /* ===================== FOOTER ===================== */
@@ -425,7 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Premium Hyper-Expressive "tneosm" Symmetrical Multi-Orbit Spindle Machine
+// Premium High-Fancy "tneosm" Symmetrical Orbit Spindle Machine Architecture
 document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('tneosmSpindleBackdrop');
   if (!canvas) return;
@@ -441,57 +399,59 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', setSize);
   setSize();
 
-  // Amplified cursor parallax tracking for hyper-expressive movement
+  // Subtle pointer feedback tracking
   window.addEventListener('mousemove', (e) => {
-    mouse.targetX = (e.clientX - canvas.width / 2) * 0.28;
-    mouse.targetY = (e.clientY - canvas.height / 2) * 0.28;
+    mouse.targetX = (e.clientX - canvas.width / 2) * 0.12;
+    mouse.targetY = (e.clientY - canvas.height / 2) * 0.12;
   });
 
   function drawTneosmSpindle() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Organic spring-like easing for mouse physics
-    mouse.x += (mouse.targetX - mouse.x) * 0.06;
-    mouse.y += (mouse.targetY - mouse.y) * 0.06;
+    // Smooth physics ease for mouse tracking
+    mouse.x += (mouse.targetX - mouse.x) * 0.05;
+    mouse.y += (mouse.targetY - mouse.y) * 0.05;
 
-    // Accelerated evolution factor for a more expressive pulse rate
-    time += 0.0045;
+    time += 0.0025;
 
-    // Rigidly locked to the top right quadrant throughout window dimensions
-    const centerX = canvas.width * 0.78 + mouse.x;
-    const centerY = canvas.height * 0.30 + mouse.y;
+    // Anchor the core directly at the top right quadrant throughout the entire window frame
+    const centerX = canvas.width * 0.76 + mouse.x;
+    const centerY = canvas.height * 0.32 + mouse.y;
 
-    // Enhanced fidelity: 64 distinct mathematical vector paths
-    const ribCount = 64; 
-    const pointsPerRib = 70;
-    const maxRadius = Math.min(canvas.width, canvas.height) * 0.48;
+    // High fidelity layer counts to replicate dense luxury particle trails
+    const ribCount = 48; 
+    const pointsPerRib = 60;
+    const maxRadius = Math.min(canvas.width, canvas.height) * 0.42;
 
     for (let i = 0; i < ribCount; i++) {
       const normRib = i / ribCount;
       
-      // Complex double-wave mathematical pinch matrix for extreme elegance
-      const pinchWave = Math.sin(time * 2.0 + normRib * Math.PI * 3.0) * 35;
-      const radius = maxRadius * (0.10 + normRib * 0.90) + pinchWave;
+      // Dynamic center pinch frequency logic mimicking tneosm design aesthetic
+      const pinchWave = Math.sin(time * 1.5 + normRib * Math.PI * 2) * 20;
+      const radius = maxRadius * (0.15 + normRib * 0.85) + pinchWave;
 
       ctx.beginPath();
 
       for (let j = 0; j < pointsPerRib; j++) {
         const normPt = j / pointsPerRib;
         
-        // Multi-layered harmonic spindle geometry equations
-        const angle = normPt * Math.PI * 2 + (time * (0.8 + (1 - normRib) * 1.1));
+        // Symmetrical spindle coordinate generation equations
+        const angle = normPt * Math.PI * 2 + (time * (0.6 + (1 - normRib) * 0.8));
 
-        // High-expressive infinity visual warp model
+        // Center-pinched hour-glass visual formula
         const xRaw = Math.cos(angle) * radius;
-        const yRaw = Math.sin(angle * 2.5) * (radius * 0.42); 
+        const yRaw = Math.sin(angle * 2) * (radius * 0.38); // Symmetrical knot distortion
 
-        // Live complex rotation matrix to generate beautiful spatial depth curves
-        const tilt = 0.68 + Math.cos(time * 0.4 + normRib * 0.5) * 0.12;
+        // Matrix rotation calculations to tilt the orbital path gracefully
+        const tilt = 0.65 + Math.cos(time * 0.3) * 0.05;
         const xRotated = xRaw * Math.cos(tilt) - yRaw * Math.sin(tilt);
         const yRotated = xRaw * Math.sin(tilt) + yRaw * Math.cos(tilt);
 
         const finalX = centerX + xRotated;
         const finalY = centerY + yRotated;
+
+        // Skip render steps for metrics entirely out of bounds
+        if (finalX < -50 || finalX > canvas.width + 50 || finalY < -50 || finalY > canvas.height + 50) continue;
 
         if (j === 0) {
           ctx.moveTo(finalX, finalY);
@@ -502,32 +462,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
       ctx.closePath();
 
-      // Premium Hyper-Vivid Dynamic Palette Cycle (Violet -> Pink -> Cyan -> Violet)
-      const colorProgress = Math.sin(time * 1.5 + normRib * Math.PI * 2.5) * 0.5 + 0.5;
+      // Premium Color-mix transitions (Neon Violet to Pink to Cyan palette)
+      const colorProgress = Math.sin(time + normRib * Math.PI * 2) * 0.5 + 0.5;
       
       let rColor, gColor, bColor;
-      if (colorProgress < 0.33) {
-        const ratio = colorProgress * 3;
+      if (colorProgress < 0.5) {
+        // Violet to Pink transition phase
+        const ratio = colorProgress * 2;
         rColor = Math.floor(168 + (236 - 168) * ratio);
         gColor = Math.floor(85 + (72 - 85) * ratio);
         bColor = Math.floor(247 + (153 - 247) * ratio);
-      } else if (colorProgress < 0.66) {
-        const ratio = (colorProgress - 0.33) * 3;
+      } else {
+        // Pink to Cyan transition phase
+        const ratio = (colorProgress - 0.5) * 2;
         rColor = Math.floor(236 + (6 - 236) * ratio);
         gColor = Math.floor(72 + (182 - 72) * ratio);
         bColor = Math.floor(153 + (212 - 153) * ratio);
-      } else {
-        const ratio = (colorProgress - 0.66) * 3;
-        rColor = Math.floor(6 + (168 - 6) * ratio);
-        gColor = Math.floor(182 + (85 - 182) * ratio);
-        bColor = Math.floor(212 + (247 - 212) * ratio);
       }
 
-      // Layered alpha mapping creating glowing holographic fields
-      const dynamicAlpha = (0.015 + normRib * 0.14) * (0.35 + Math.sin(time * 2.5 + normRib * 5.0) * 0.45);
+      // High density opacity tuning for cinematic depth fading
+      const dynamicAlpha = (0.01 + normRib * 0.12) * (0.3 + Math.sin(time * 2 + normRib * 4) * 0.4);
 
-      ctx.strokeStyle = `rgba(${rColor}, ${gColor}, ${bColor}, ${Math.max(0.005, Math.min(0.28, dynamicAlpha))})`;
-      ctx.lineWidth = 0.7 + (normRib * 1.1);
+      ctx.strokeStyle = `rgba(${rColor}, ${gColor}, ${bColor}, ${Math.max(0, Math.min(1, dynamicAlpha))})`;
+      ctx.lineWidth = 0.8 + (normRib * 0.7);
       ctx.stroke();
     }
 
