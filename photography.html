@@ -79,7 +79,7 @@ p{margin:0 0 1.2em; color:var(--ink-soft);}
 }
 .eyebrow::before{content:""; width:16px; height:1px; background:var(--line); display:inline-block;}
 
-/* Isolated Filter controls styling */
+/* Filter controls styling */
 .filter-controls {
   display: flex; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap;
 }
@@ -116,7 +116,6 @@ section{padding:6rem 0;}
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, border-color 0.4s ease;
   opacity: 1; transform: scale(1);
 }
-/* Class used to cleanly hide unselected tags */
 .feat-card.hidden {
   display: none; opacity: 0; transform: scale(0.95);
 }
@@ -182,45 +181,50 @@ footer{border-top:1px solid var(--line); padding:3.5rem 0 2.5rem; margin-top:5re
       <h2>Captured Frames</h2>
     </div>
 
-    <!-- Filter Mechanism Interface Controls -->
+    <!-- Category Controls -->
     <div class="filter-controls">
       <button class="filter-btn active" data-filter="all">All Frames</button>
-      <button class="filter-btn" data-filter="automation">Automation</button>
-      <button class="filter-btn" data-filter="architecture">Architecture</button>
-      <button class="filter-btn" data-filter="process">Digital Twin</button>
+      <button class="filter-btn" data-filter="portrait">Portraits</button>
+      <button class="filter-btn" data-filter="official">Official</button>
+      <button class="filter-btn" data-filter="creative">Creative</button>
     </div>
 
-    <!-- Gallery items mapping sorting data structures -->
+    <!-- Restored Gallery Sequence -->
     <div class="featured-strip" id="galleryGrid">
-      <div class="feat-card" data-category="automation">
+      
+      <!-- 1. The Portrait Pic -->
+      <div class="feat-card" data-category="portrait">
         <div class="feat-thumb js-lightbox-trigger">
-          <img src="img/automation.jpg" alt="Digital Site Infrastructure" style="width:100%; height:100%; object-fit:cover;">
+          <img src="img/portrait.jpg" alt="Portrait Studio Session" style="width:100%; height:100%; object-fit:cover;">
         </div>
         <div class="feat-body">
-          <span class="frame-tag">R.01 · Automation</span>
-          <h4>Digital Site Infrastructure</h4>
+          <span class="frame-tag">R.01 · Portrait</span>
+          <h4>Portrait Profile</h4>
         </div>
       </div>
 
-      <div class="feat-card" data-category="architecture">
+      <!-- 2. The Official Pic -->
+      <div class="feat-card" data-category="official">
         <div class="feat-thumb js-lightbox-trigger">
-          <img src="img/Digital.jpg" alt="Intelligent Urban Grid" style="width:100%; height:100%; object-fit:cover;">
+          <img src="img/official.jpg" alt="Official Corporate Profile" style="width:100%; height:100%; object-fit:cover;">
         </div>
         <div class="feat-body">
-          <span class="frame-tag">R.02 · Architecture</span>
-          <h4>Intelligent Urban Grid</h4>
+          <span class="frame-tag">R.02 · Official</span>
+          <h4>Official Presentation</h4>
         </div>
       </div>
 
-      <div class="feat-card" data-category="process">
+      <!-- 3. The Rest (Example Creative Content) -->
+      <div class="feat-card" data-category="creative">
         <div class="feat-thumb js-lightbox-trigger">
-          <img src="img/Twin.jpg" alt="Industrial Process Mirror" style="width:100%; height:100%; object-fit:cover;">
+          <img src="img/creative.jpg" alt="Creative Design Concept" style="width:100%; height:100%; object-fit:cover;">
         </div>
         <div class="feat-body">
-          <span class="frame-tag">R.03 · Digital Twin</span>
-          <h4>Industrial Process Mirror</h4>
+          <span class="frame-tag">R.03 · Creative</span>
+          <h4>Experimental Atmosphere</h4>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -267,14 +271,13 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 });
 
-// Dynamic Gallery Sorting/Filtering Engine Logic 
+// Dynamic Gallery Sorting Engine Logic
 document.addEventListener('DOMContentLoaded', () => {
   const filterButtons = document.querySelectorAll('.filter-btn');
   const cards = document.querySelectorAll('.feat-card');
 
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
-      // Manage active button class rules
       filterButtons.forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
 
@@ -292,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// tneosm background spindle rendering engine code remains untouched below
+// tneosm background spindle rendering engine
 document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('tneosmSpindleBackdrop');
   if (!canvas) return;
