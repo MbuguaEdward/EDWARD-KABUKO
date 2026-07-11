@@ -1,13 +1,321 @@
-<div class="project-grid">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineering — Edward Kabuko</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ===================================================================
+   DESIGN TOKENS (Premium Cinematic Dark Mode)
+=================================================================== */
+:root{
+  --ink:#F3F3F6;
+  --ink-soft:#B7B7C2;
+  --muted:#84848F;
+  --paper:#08080B;
+  --paper-2:#111116;
+  --paper-3:#171721;
+  --white:#121217;
+  --line:rgba(255,255,255,0.11);
+  --line-soft:rgba(255,255,255,0.05);
+  
+  /* Cyberpunk / Engineering High-Contrast Accents */
+  --blue:#8B5CF6;
+  --blue-deep:#B9A2FF;
+  --blue-tint:rgba(139,92,246,0.15);
+  --amber:#FF7A45;
+  --amber-deep:#FFA36B;
+  --amber-tint:rgba(255,122,69,0.15);
+  --grad-primary: linear-gradient(135deg, var(--blue) 0%, #B27CFF 50%, var(--amber) 100%);
+
+  --font-display:'Space Grotesk', sans-serif;
+  --font-body:'Inter', -apple-system, sans-serif;
+  --font-mono:'JetBrains Mono', monospace;
+
+  --max:1180px;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x: hidden;
+}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;margin:0;padding:0;}
+button{font-family:inherit;cursor:pointer;}
+
+.container{max-width:var(--max);margin:0 auto;padding:0 6vw;}
+
+/* Animated/Glow Ambient Elements */
+.grid-bg{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:
+    linear-gradient(var(--line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+  background-size:64px 64px;
+  opacity:0.4;
+  mask-image:radial-gradient(circle at 50% 30%, black 40%, transparent 85%);
+}
+
+.glow-field{ position:fixed; inset:0; z-index:-2; pointer-events:none; overflow:hidden; }
+.glow{ position:absolute; border-radius:50%; filter:blur(120px); pointer-events:none; opacity: 0.6; }
+.glow-a{ width:700px; height:700px; top:-250px; right:-200px; background:radial-gradient(circle, rgba(139,92,246,0.22), transparent 70%); }
+.glow-b{ width:600px; height:600px; bottom:10%; left:-250px; background:radial-gradient(circle, rgba(255,122,69,0.15), transparent 70%); }
+
+/* ===================== TYPE & ANIMATIONS ===================== */
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(24px); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+h1,h2,h3{
+  font-family:var(--font-display);
+  font-weight:500;
+  letter-spacing:-0.01em;
+  margin:0 0 0.6em;
+  color:var(--ink);
+}
+h1{
+  font-size:clamp(2.5rem, 5vw, 4.2rem); 
+  line-height:1.08; 
+  letter-spacing:-0.03em;
+  animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+h2{font-size:clamp(1.8rem, 3.5vw, 2.5rem); margin-bottom:1rem;}
+h3{font-size:1.35rem; margin-bottom:0.5rem;}
+p{margin:0 0 1.3em; color:var(--ink-soft); font-size:1.05rem;}
+
+.grad-text {
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:0.78rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+  display:flex;align-items:center;gap:0.6em;
+  margin-bottom:1.5rem;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--blue);display:inline-block;}
+
+.frame-tag{
+  font-family:var(--font-mono);
+  font-size:0.72rem;
+  color:var(--amber-deep);
+  letter-spacing:0.04em;
+  display:block;
+  margin-bottom:0.4rem;
+}
+
+/* ===================== NAV ===================== */
+.site-nav{
+  position:sticky; top:0; z-index:50;
+  background:rgba(8,8,11,0.75);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.site-nav .container{
+  display:flex; align-items:center; justify-content:space-between;
+  height:76px;
+}
+.brand{
+  font-family:var(--font-mono); font-size:1rem; font-weight:500;
+  display:flex; align-items:center; gap:0.5em;
+}
+.brand .dot{
+  width:9px; height:9px; border-radius:50%; 
+  background: var(--grad-primary);
+  box-shadow: 0 0 10px rgba(139,92,246,0.6);
+}
+.nav-links{display:flex; gap:2.1rem; align-items:center;}
+.nav-links a{font-family:var(--font-mono); font-size:0.82rem; color:var(--ink-soft); position:relative; padding:0.3em 0; transition: color 0.2s;}
+.nav-links a.active, .nav-links a:hover{color:var(--ink);}
+.nav-links a.active::after{content:""; position:absolute; left:0; right:0; bottom:-2px; height:2px; background:var(--blue-deep);}
+.nav-cta{
+  font-family:var(--font-mono); font-size:0.78rem; border:1px solid var(--line); 
+  padding:0.55em 1.1em; border-radius:2px; transition: all 0.2s;
+}
+.nav-cta:hover{background:var(--ink); color:var(--paper); border-color:var(--ink); box-shadow: 0 4px 15px rgba(255,255,255,0.1);}
+.nav-toggle{display:none; background:none; border:none; color:var(--ink); font-size:1.5rem;}
+
+/* ===================== ENGINEERING HERO ===================== */
+.eng-hero{padding:7rem 0 4rem;}
+.lede{font-size:1.2rem; color:var(--ink-soft); max-width:750px; margin-bottom:0;}
+
+/* ===================== PREMIUM GRID & CARDS ===================== */
+.project-section { padding-bottom: 7rem; }
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.project-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Thumbnail / Image Frame */
+.project-thumb {
+  aspect-ratio: 16 / 9;
+  background: var(--paper-2);
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line-soft);
+}
+.project-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Card content */
+.project-info {
+  padding: 2.2rem;
+}
+.project-info p {
+  font-size: 0.98rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Technology Pills Styling */
+.stack-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.stack-pill {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  background: var(--paper-3);
+  border: 1px solid var(--line-soft);
+  padding: 0.3em 0.8em;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+/* Hidden gradient top bar revealed on hover */
+.project-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--grad-primary);
+  opacity: 0;
+  z-index: 3;
+  transition: opacity 0.3s ease;
+}
+
+/* Interactive Hover Animations */
+.project-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(139,92,246,0.4);
+  background: var(--paper-2);
+  box-shadow: 
+    0 0 0 1px rgba(139,92,246,0.1),
+    0 24px 48px -20px rgba(139,92,246,0.3);
+}
+.project-card:hover::before {
+  opacity: 1;
+}
+.project-card:hover .project-thumb img {
+  transform: scale(1.03);
+}
+.project-card:hover .stack-pill {
+  border-color: rgba(139,92,246,0.3);
+  color: var(--ink);
+  background: rgba(139,92,246,0.06);
+}
+
+.hatch {
+  background-image: repeating-linear-gradient(45deg, var(--line-soft) 0, var(--line-soft) 1px, transparent 1px, transparent 14px);
+}
+
+/* ===================== FOOTER ===================== */
+footer{border-top:1px solid var(--line); padding:3.4rem 0 2.2rem; background: var(--paper-2);}
+.foot-bottom{
+  display:flex; justify-content:space-between; align-items:center;
+  font-family:var(--font-mono); font-size:0.75rem; color:var(--muted);
+}
+
+/* RESPONSIVE LAYOUT */
+@media (max-width:920px){
+  .project-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+@media (max-width:640px){
+  .nav-links{position:fixed; top:76px; left:0; right:0; background:var(--paper); flex-direction:column; align-items:flex-start; padding:1.5rem 6vw; border-bottom:1px solid var(--line); display:none; gap:1.2rem;}
+  .nav-links.open{display:flex;}
+  .nav-cta{display:none;}
+  .nav-toggle{display:block;}
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="glow-field">
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+</div>
+
+<!-- Navigation Bar -->
+<nav class="site-nav">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="dot"></span>E. Edwards</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="engineering.html" class="active">Engineering</a></li>
+      <li><a href="photography.html">Photography</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Let's talk</a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+  </div>
+</nav>
+
+<!-- Main Header -->
+<main class="container">
+  <header class="eng-hero">
+    <div class="eyebrow">R.00 — Engineering Repo</div>
+    <h1>Case studies from building things that <span class="grad-text">actually work</span>.</h1>
+    <p class="lede">Conceptual blueprints, structural asset studies, and workflow automation models mapped out cleanly by focus categories.</p>
+  </header>
+
+  <!-- Clean, Fixed Cards Section -->
+  <section class="project-section">
+    <div class="project-grid">
 
       <!-- Card 1 · Automation -->
       <div class="project-card">
         <div class="project-thumb hatch">
-          <img src="img/automation.jpg" alt="Modular conveyor drive assembly">
+          <img src="img/automation.jpg" alt="Digital Site Logistics">
         </div>
         <div class="project-info">
-          <span class="frame-tag">R.01 · Site Automation</span>
-          <h3><a href="engineering-project.html">Digital Site Logistics</a></h3>
+          <span class="frame-tag">// R.01 · SITE AUTOMATION</span>
+          <h3>Digital Site Logistics</h3>
           <p>Studying how modern layout automation and real-time tracking loops reduce material waste and streamline structural assembly variables right on the construction floor.</p>
           <div class="stack-list">
             <span class="stack-pill">Site Logistics</span>
@@ -20,11 +328,11 @@
       <!-- Card 2 · Smart Cities -->
       <div class="project-card">
         <div class="project-thumb hatch">
-          <img src="img/Digital.jpg" alt="Smart Infrastructure Network Matrix">
+          <img src="img/Digital.jpg" alt="Intelligent Urban Routing">
         </div>
         <div class="project-info">
-          <span class="frame-tag">R.02 · Infrastructure</span>
-          <h3><a href="engineering-project.html">Intelligent Urban Routing</a></h3>
+          <span class="frame-tag">// R.02 · INFRASTRUCTURE</span>
+          <h3>Intelligent Urban Routing</h3>
           <p>Conceptualizing dynamic network layouts to map critical utility pipelines and municipal assets cleanly across expanding, tech-integrated urban environments.</p>
           <div class="stack-list">
             <span class="stack-pill">Spatial Mapping</span>
@@ -37,11 +345,11 @@
       <!-- Card 3 · Digital Twin -->
       <div class="project-card">
         <div class="project-thumb hatch">
-          <img src="img/Twin.jpg" alt="Virtual 3D Structural Process Mirror">
+          <img src="img/Twin.jpg" alt="Structural Process Mirroring">
         </div>
         <div class="project-info">
-          <span class="frame-tag">R.03 · Spatial Modeling</span>
-          <h3><a href="engineering-project.html">Structural Process Mirroring</a></h3>
+          <span class="frame-tag">// R.03 · SPATIAL MODELING</span>
+          <h3>Structural Process Mirroring</h3>
           <p>Exploring how physical BIM models interface with digital layers to monitor structural stress, load balances, and long-term building fatigue early in the lifecycle.</p>
           <div class="stack-list">
             <span class="stack-pill">BIM Frameworks</span>
@@ -54,11 +362,11 @@
       <!-- Card 4 · Analysis -->
       <div class="project-card">
         <div class="project-thumb hatch">
-          <img src="img/smart.jpg" alt="Predictive data suite analytical interface">
+          <img src="img/smart.jpg" alt="Predictive Analytics Suite">
         </div>
         <div class="project-info">
-          <span class="frame-tag">R.04 · Computation</span>
-          <h3><a href="engineering-project.html">Predictive Analytics Suite</a></h3>
+          <span class="frame-tag">// R.04 · COMPUTATION</span>
+          <h3>Predictive Analytics Suite</h3>
           <p>Structuring clean code formulas and logical scripts to parse complex structural weights, material balances, and multi-variable data sheets with precision.</p>
           <div class="stack-list">
             <span class="stack-pill">Python Scripts</span>
@@ -69,3 +377,31 @@
       </div>
 
     </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="foot-bottom">
+      <span>© 2026 Edward Kabuko. All rights reserved.</span>
+      <a href="contact.html" style="border-bottom: 1px solid var(--muted); padding-bottom: 2px;">Discuss a project &rarr;</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Mobile Navigation Toggle Animation
+document.addEventListener('DOMContentLoaded', () => {
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', () => {
+      links.classList.toggle('open');
+      toggle.textContent = links.classList.contains('open') ? '✕' : '☰';
+    });
+  }
+});
+</script>
+</body>
+</html>
