@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Edward Kabuko — Engineer &amp; Designer AI/ML Engineer</title>
-<meta name="description" content="Portfolio and journal of Edward Kabuko — Civil Engineer and Designer/ML Engineer. Engineering case studies, a photography gallery, and practical tips.">
+<title>Edward Kabuko — Engineer & Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -12,8 +11,6 @@
    DESIGN TOKENS
    Concept: "Blueprint & Darkroom" — engineering drafting meets film
    photography. Cyanotype blue = engineering. Darkroom amber = photo.
-   Frame/revision numbers (F.01, R.02) are the shared visual language
-   between drawing revisions and film frame counters.
 =================================================================== */
 :root{
   --ink:#F3F3F6;
@@ -77,7 +74,7 @@ h1,h2,h3,h4{
   margin:0 0 0.6em;
   color:var(--ink);
 }
-h1{font-size:clamp(2.6rem, 6vw, 5rem); line-height:1.02; letter-spacing:-0.02em;}
+h1{font-size:clamp(2.6rem, 5vw, 4.5rem); line-height:1.05; letter-spacing:-0.02em;}
 h2{font-size:clamp(1.7rem, 3.4vw, 2.6rem); line-height:1.1;}
 h3{font-size:1.3rem;}
 p{margin:0 0 1.1em;}
@@ -97,7 +94,7 @@ p{margin:0 0 1.1em;}
   color:var(--muted);
   letter-spacing:0.04em;
 }
-.lede{font-size:1.2rem; color:var(--ink-soft); max-width:640px;}
+.lede{font-size:1.2rem; color:var(--ink-soft); max-width:760px;}
 
 /* ===================== NAV ===================== */
 .site-nav{
@@ -119,8 +116,7 @@ p{margin:0 0 1.1em;}
 .nav-links{display:flex; gap:2.1rem; align-items:center;}
 .nav-links a{
   font-family:var(--font-mono); font-size:0.82rem; letter-spacing:0.03em;
-  color:var(--ink-soft); position:relative; padding:0.3em 0;
-}
+  color:var(--ink-soft); position:relative; padding:0.3em 0;}
 .nav-links a.active, .nav-links a:hover{color:var(--ink);}
 .nav-links a.active::after{
   content:""; position:absolute; left:0; right:0; bottom:-2px; height:2px; background:var(--blue);
@@ -131,7 +127,7 @@ p{margin:0 0 1.1em;}
   transition:background .18s, color .18s;
 }
 .nav-cta:hover{background:var(--ink); color:var(--white);}
-.nav-toggle{display:none; background:none; border:none;}
+.nav-toggle{display:none; background:none; border:none; color:var(--ink); font-size:1.5rem;}
 
 /* ===================== BUTTONS ===================== */
 .btn{
@@ -147,47 +143,28 @@ p{margin:0 0 1.1em;}
 .btn-primary:hover{filter:brightness(1.1);}
 .btn-ghost{background:transparent; color:var(--ink);}
 .btn-ghost:hover{background:var(--ink); color:var(--white);}
-.btn-blue{border-color:var(--blue); color:var(--blue);}
-.btn-blue:hover{background:var(--blue); color:var(--white);}
-.btn-amber{border-color:var(--amber); color:var(--amber-deep);}
-.btn-amber:hover{background:var(--amber); color:var(--white); border-color:var(--amber);}
 
 /* ===================== SECTIONS ===================== */
-section{padding:6.5rem 0;}
-section.tight{padding:4rem 0;}
+section{padding:5.5rem 0;}
 .section-head{
-  display:flex; justify-content:space-between; align-items:flex-end;
-  gap:2rem; margin-bottom:3rem; flex-wrap:wrap;
+  margin-bottom:3rem;
 }
-hr.rule{border:none; border-top:1px solid var(--line); margin:0;}
 
 /* ===================== HERO ===================== */
-.hero{padding-top:4.5rem; padding-bottom:5rem;}
-.hero-grid{
-  display:grid; grid-template-columns:1.3fr 1fr; gap:4rem; align-items:end;
-}
-.hero-visual{
-  aspect-ratio:4/5; border:1px solid var(--line);
-  position:relative; overflow:hidden; background:var(--paper-2);
-}
-.hero-actions{display:flex; gap:1rem; margin-top:2.2rem; flex-wrap:wrap;}
-.hero-meta{
-  display:flex; flex-direction:column; gap:1.4rem; padding-bottom:0.5rem;
-}
-.hero-meta .stat{border-top:1px solid var(--line); padding-top:0.8rem;}
-.hero-meta .stat b{display:block; font-family:var(--font-display); font-size:1.6rem;}
-.hero-meta .stat span{font-family:var(--font-mono); font-size:0.75rem; color:var(--muted);}
+.hero{padding-top:6rem; padding-bottom:5rem;}
+.hero-actions{display:flex; gap:1rem; margin-top:2.5rem; flex-wrap:wrap;}
 
-/* ===================== SPLIT TEASERS (home) ===================== */
-.teasers{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line);}
+/* ===================== SPLIT TEASERS ===================== */
+.teasers{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); margin-top:2rem;}
 .teaser{
   background:var(--paper); padding:2.6rem 2.2rem; position:relative;
   transition:background .2s;
-  min-height:280px; display:flex; flex-direction:column; justify-content:space-between;
+  min-height:260px; display:flex; flex-direction:column; justify-content:space-between;
 }
 .teaser:hover{background:var(--paper-2);}
 .teaser .num{font-family:var(--font-mono); color:var(--muted); font-size:0.8rem;}
-.teaser h3{margin-top:1rem;}
+.teaser h3{margin-top:1rem; font-size:1.4rem;}
+.teaser p{font-size:0.92rem; color:var(--ink-soft); margin-bottom:0;}
 .teaser .tag{
   font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.05em;
   text-transform:uppercase; padding:0.3em 0.7em; border:1px solid var(--line);
@@ -196,162 +173,52 @@ hr.rule{border:none; border-top:1px solid var(--line); margin:0;}
 .teaser.eng .tag{border-color:var(--blue); color:var(--blue-deep);}
 .teaser.photo .tag{border-color:var(--amber); color:var(--amber-deep);}
 .teaser.blog .tag{border-color:var(--ink-soft); color:var(--ink-soft);}
-.teaser .arrow{font-family:var(--font-mono); font-size:1.3rem; align-self:flex-end;}
 
-/* ===================== FEATURED STRIP ===================== */
-.featured-strip{display:grid; grid-template-columns:repeat(4,1fr); gap:1.4rem;}
-.feat-card{border:1px solid var(--line); background:var(--white);}
-.feat-thumb{aspect-ratio:4/3; background:var(--paper-2); position:relative; overflow:hidden;}
-.feat-card .feat-body{padding:1.1rem 1.2rem;}
-.feat-card h4{font-size:0.98rem; margin:0.3em 0 0.2em;}
-.feat-card .frame-tag{display:block;}
+/* ===================== FEATURED GRID ===================== */
+.featured-strip{display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem;}
+.feat-card{border:1px solid var(--line); background:var(--white); overflow:hidden;}
+.feat-thumb{aspect-ratio:16/10; background:var(--paper-2); position:relative; overflow:hidden;}
+.feat-card .feat-body{padding:1.3rem 1.4rem;}
+.feat-card h4{font-size:1.15rem; margin:0.4em 0 0.4em;}
+.feat-card p{color:var(--ink-soft); font-size:0.9rem; margin-bottom:0;}
+.feat-card .frame-tag{display:block; margin-bottom:0.2rem;}
 
 /* ===================== FOOTER ===================== */
 footer{border-top:1px solid var(--line); padding:3.4rem 0 2.2rem; margin-top:4rem;}
-.foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:2rem; margin-bottom:2.4rem;}
-.foot-grid h4{font-family:var(--font-mono); font-size:0.78rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); margin-bottom:1rem;}
-.foot-grid a{display:block; padding:0.3em 0; font-size:0.92rem; color:var(--ink-soft);}
-.foot-grid a:hover{color:var(--ink);}
 .foot-bottom{
   display:flex; justify-content:space-between; align-items:center;
-  padding-top:1.6rem; border-top:1px solid var(--line);
   font-family:var(--font-mono); font-size:0.75rem; color:var(--muted);
   flex-wrap:wrap; gap:0.8rem;
 }
 
-/* ===================== PLACEHOLDER GRAPHIC (svg photo/thumbs) ===================== */
-.ph{width:100%; height:100%; display:block;}
+/* ===================== SYSTEMS & GLOWS ===================== */
 .hatch{
   background-image: repeating-linear-gradient(45deg, var(--line-soft) 0, var(--line-soft) 1px, transparent 1px, transparent 13px);
 }
-.ph-note{
-  position:absolute; bottom:0.6rem; right:0.7rem;
-  font-family:var(--font-mono); font-size:0.62rem; color:var(--muted);
-  background:var(--paper); padding:0.15em 0.5em; border:1px solid var(--line);
-}
+.glow-field{ position:fixed; inset:0; z-index:-2; pointer-events:none; overflow:hidden; }
+.glow{ position:absolute; border-radius:50%; filter:blur(90px); pointer-events:none; }
+.glow-a{ width:640px; height:640px; top:-220px; left:-160px; background:radial-gradient(circle, rgba(139,92,246,0.25), transparent 70%); }
+.glow-b{ width:560px; height:560px; top:-100px; right:-220px; background:radial-gradient(circle, rgba(255,122,69,0.18), transparent 70%); }
 
-/* ===================== PROJECT / GALLERY GRID ===================== */
-.filter-bar{display:flex; gap:0.7rem; flex-wrap:wrap; margin-bottom:2.6rem;}
-.filter-chip{
-  font-family:var(--font-mono); font-size:0.78rem; padding:0.5em 1.1em;
-  border:1px solid var(--line); border-radius:20px; color:var(--ink-soft);
-  background:transparent; transition:all .15s;
+.grad{
+  background:linear-gradient(100deg, var(--blue) 0%, #C9A6FF 45%, var(--amber) 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
 }
-.filter-chip.active, .filter-chip:hover{background:var(--ink); color:var(--white); border-color:var(--ink);}
-
-.project-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem;}
-.project-card{border:1px solid var(--line); background:var(--white); overflow:hidden;}
-.project-thumb{aspect-ratio:16/11; background:var(--paper-2); position:relative;}
-.project-info{padding:1.3rem 1.4rem 1.6rem;}
-.project-info .frame-tag{margin-bottom:0.5rem; display:block;}
-.stack-list{display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.9rem;}
-.stack-pill{
-  font-family:var(--font-mono); font-size:0.68rem; padding:0.25em 0.6em;
-  background:var(--blue-tint); color:var(--blue-deep); border-radius:2px;
+body::before{
+  content:""; position:fixed; inset:0; z-index:-3; pointer-events:none;
+  background:radial-gradient(ellipse at 50% -10%, rgba(139,92,246,0.08), transparent 55%);
 }
-
-.masonry{columns:4 220px; column-gap:1rem;}
-.masonry .m-item{break-inside:avoid; margin-bottom:1rem; border:1px solid var(--line); background:var(--paper-2); position:relative; cursor:pointer;}
-.masonry .m-item .cap{
-  position:absolute; left:0; right:0; bottom:0; padding:0.6em 0.8em;
-  background:linear-gradient(to top, rgba(23,27,29,0.72), transparent);
-  color:var(--white); font-family:var(--font-mono); font-size:0.7rem; opacity:0; transition:opacity .2s;
+.feat-card{ transition:border-color .2s, box-shadow .2s; }
+.feat-card:hover{
+  border-color:rgba(139,92,246,0.5);
+  box-shadow:0 0 0 1px rgba(139,92,246,0.15), 0 12px 40px -12px rgba(139,92,246,0.25);
 }
-.masonry .m-item:hover .cap{opacity:1;}
-
-/* lightbox */
-.lightbox{
-  position:fixed; inset:0; background:rgba(2,2,4,0.94); z-index:100;
-  display:none; align-items:center; justify-content:center; padding:4vh 4vw;
-}
-.lightbox.open{display:flex;}
-.lightbox-inner{max-width:900px; width:100%; color:var(--ink);}
-.lightbox-frame{aspect-ratio:3/2; background:var(--paper-2); margin-bottom:1rem;}
-.lightbox-close{position:absolute; top:2rem; right:3rem; color:var(--ink); font-family:var(--font-mono); background:none; border:1px solid rgba(255,255,255,0.25); padding:0.5em 1em;}
-
-/* ===================== BLOG ===================== */
-.blog-layout{display:grid; grid-template-columns:2fr 1fr; gap:3rem;}
-.post-row{
-  display:grid; grid-template-columns:180px 1fr; gap:1.6rem;
-  padding:1.8rem 0; border-top:1px solid var(--line);
-}
-.post-row:last-child{border-bottom:1px solid var(--line);}
-.post-thumb{aspect-ratio:4/3; background:var(--paper-2);}
-.post-tag{
-  font-family:var(--font-mono); font-size:0.68rem; text-transform:uppercase;
-  color:var(--blue-deep); letter-spacing:0.05em;
-}
-.post-row h3{margin:0.4em 0 0.4em; font-size:1.25rem;}
-.post-meta{font-family:var(--font-mono); font-size:0.75rem; color:var(--muted);}
-.sidebar-card{border:1px solid var(--line); padding:1.6rem; margin-bottom:1.6rem; background:var(--white);}
-.sidebar-card h4{font-size:0.95rem; margin-bottom:0.6rem;}
-.sidebar-card p{font-size:0.9rem; color:var(--ink-soft); margin-bottom:1rem;}
-.tag-cloud{display:flex; flex-wrap:wrap; gap:0.5rem;}
-.tag-cloud span{
-  font-family:var(--font-mono); font-size:0.72rem; padding:0.35em 0.7em;
-  background:var(--paper-2); border-radius:2px; color:var(--ink-soft);
-}
-.field{
-  width:100%; padding:0.75em 0.9em; border:1px solid var(--line); background:var(--paper-2);
-  font-family:var(--font-body); font-size:0.92rem; margin-bottom:0.8rem; border-radius:2px;
-  color:var(--ink);
-}
-
-/* article */
-.article-head{max-width:740px; margin:0 auto 3rem;}
-.article-body{max-width:740px; margin:0 auto; font-size:1.08rem;}
-.article-body h2{margin-top:1.6em;}
-.article-body p{margin-bottom:1.3em;}
-.article-body blockquote{
-  font-family:var(--font-display); font-size:1.3rem; border-left:2px solid var(--amber);
-  padding-left:1.4rem; margin:2rem 0; color:var(--ink-soft);
-}
-.article-cover{aspect-ratio:16/8; background:var(--paper-2); max-width:920px; margin:0 auto 3rem;}
-.promo-box{
-  max-width:740px; margin:2.5rem auto; border:1px solid var(--amber); background:var(--amber-tint);
-  padding:1.6rem 1.8rem; display:flex; justify-content:space-between; align-items:center; gap:1.5rem; flex-wrap:wrap;
-}
-
-/* ===================== ABOUT ===================== */
-.split{display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start;}
-.timeline{border-left:1px solid var(--line); padding-left:2rem; display:flex; flex-direction:column; gap:2.2rem;}
-.timeline .item{position:relative;}
-.timeline .item::before{
-  content:""; position:absolute; left:-2.05rem; top:0.35rem; width:9px; height:9px; border-radius:50%; background:var(--ink);
-}
-.timeline .item.photo::before{background:var(--amber);}
-.timeline .item.eng::before{background:var(--blue);}
-.timeline .item .frame-tag{margin-bottom:0.3rem; display:block;}
-.skills-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:2rem;}
-.skill-block h4{font-family:var(--font-mono); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); margin-bottom:0.8rem;}
-.skill-bar{height:4px; background:var(--paper-3); margin-bottom:1rem; position:relative;}
-.skill-bar i{position:absolute; left:0; top:0; bottom:0; background:var(--blue); display:block;}
-.skill-row{font-size:0.88rem; display:flex; justify-content:space-between; margin-bottom:0.3rem;}
-
-/* ===================== CASE STUDY ===================== */
-.cs-meta-bar{display:flex; gap:2.5rem; flex-wrap:wrap; padding:1.6rem 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin-bottom:3rem;}
-.cs-meta-bar div span{display:block; font-family:var(--font-mono); font-size:0.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.3rem;}
-.cs-gallery{display:grid; grid-template-columns:2fr 1fr; gap:1rem; margin:2.5rem 0;}
-.cs-gallery .tall{grid-row:span 2;}
-.cs-img{background:var(--paper-2); border:1px solid var(--line); aspect-ratio:4/3;}
-
-/* ===================== CONTACT ===================== */
-.contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:4rem;}
-.contact-form .field, .contact-form textarea{width:100%;}
-.contact-form textarea{padding:0.9em; border:1px solid var(--line); background:var(--paper-2); font-family:var(--font-body); border-radius:2px; min-height:140px; color:var(--ink);}
-.contact-form label{font-family:var(--font-mono); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--muted); display:block; margin-bottom:0.4rem;}
-.contact-form .fgroup{margin-bottom:1.3rem;}
+.brand .dot{background:linear-gradient(135deg, var(--blue), var(--amber)); box-shadow:0 0 8px rgba(139,92,246,0.7);}
 
 /* ===================== RESPONSIVE ===================== */
 @media (max-width:980px){
-  .hero-grid, .split, .contact-grid, .blog-layout{grid-template-columns:1fr;}
   .teasers{grid-template-columns:1fr;}
   .featured-strip{grid-template-columns:repeat(2,1fr);}
-  .project-grid{grid-template-columns:repeat(2,1fr);}
-  .foot-grid{grid-template-columns:1fr 1fr;}
-  .masonry{columns:2;}
-  .cs-gallery{grid-template-columns:1fr;}
-  .skills-grid{grid-template-columns:1fr;}
 }
 @media (max-width:640px){
   .nav-links{
@@ -363,68 +230,14 @@ footer{border-top:1px solid var(--line); padding:3.4rem 0 2.2rem; margin-top:4re
   .nav-cta{display:none;}
   .nav-toggle{display:block;}
   .featured-strip{grid-template-columns:1fr;}
-  .project-grid{grid-template-columns:1fr;}
-  .foot-grid{grid-template-columns:1fr 1fr;}
-  .post-row{grid-template-columns:1fr;}
-  .masonry{columns:1;}
 }
-
-/* reduced motion */
-@media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto;}
-  *{transition:none !important; animation:none !important;}
-}
-
-/* focus visibility */
-a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
-  outline:2px solid var(--blue); outline-offset:2px;
-}
-
-/* ===================== GLOW / GRADIENT SYSTEM ===================== */
-.glow-field{
-  position:fixed; inset:0; z-index:-2; pointer-events:none; overflow:hidden;
-}
-.glow{
-  position:absolute; border-radius:50%; filter:blur(90px); pointer-events:none;
-}
-.glow-a{ width:640px; height:640px; top:-220px; left:-160px; background:radial-gradient(circle, rgba(139,92,246,0.32), transparent 70%); }
-.glow-b{ width:560px; height:560px; top:-100px; right:-220px; background:radial-gradient(circle, rgba(255,122,69,0.22), transparent 70%); }
-
-.grad{
-  background:linear-gradient(100deg, var(--blue) 0%, #C9A6FF 45%, var(--amber) 100%);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-}
-.grad-underline{
-  text-decoration:none; border-bottom:2px solid transparent;
-  border-image:linear-gradient(90deg, var(--blue), var(--amber)) 1;
-}
-
-/* subtle noise-free vignette so pure black doesn't look flat */
-body::before{
-  content:""; position:fixed; inset:0; z-index:-3; pointer-events:none;
-  background:radial-gradient(ellipse at 50% -10%, rgba(139,92,246,0.10), transparent 55%);
-}
-
-/* glowing border treatment for elevated cards on hover */
-.feat-card, .project-card, .sidebar-card, .m-item{
-  transition:border-color .2s, box-shadow .2s;
-}
-.feat-card:hover, .project-card:hover{
-  border-color:rgba(139,92,246,0.5);
-  box-shadow:0 0 0 1px rgba(139,92,246,0.15), 0 12px 40px -12px rgba(139,92,246,0.25);
-}
-.teaser.photo:hover{ box-shadow: inset 0 0 0 1px rgba(255,122,69,0.4); }
-.teaser.eng:hover{ box-shadow: inset 0 0 0 1px rgba(139,92,246,0.4); }
-
-.eyebrow::before{background:linear-gradient(90deg, var(--blue), var(--amber));}
-.brand .dot{background:linear-gradient(135deg, var(--blue), var(--amber)); box-shadow:0 0 8px rgba(139,92,246,0.7);}
-
 </style>
 </head>
 <body>
 <div class="grid-bg"></div>
 <div class="glow-field"><div class="glow glow-a"></div><div class="glow glow-b"></div></div>
 
+<!-- Main Navigation -->
 <nav class="site-nav">
   <div class="container">
     <a href="index.html" class="brand"><span class="dot"></span>E. Edwards</a>
@@ -440,164 +253,105 @@ body::before{
   </div>
 </nav>
 
+<!-- Hero Presentation Block -->
 <header class="hero">
-  <div class="container hero-grid">
-    <div>
-      <div class="eyebrow">F.00 — Civil Engineer / Designer/ML Engineer</div>
-      <h1>Hi, I'm Edward Kabuko, a Civil Engineering student at Meru University of Science and Technology with a growing passion for technology, design, and innovation. <span class="grad">I combine engineering knowledge with skills in BIM design, UI/UX design, and currently learning ML to develop practical twin buildings, user-focused solutions.</span>.</h1>
-      <p class="lede">  My interests include GIS-BIM integration, smart cities, digital twins, and leveraging technology to solve real-world infrastructure challenges.</p>
-      <div class="hero-actions">
-        <a href="engineering.html" class="btn btn-blue">View engineering work</a>
-        <a href="photography.html" class="btn btn-amber">See the gallery</a>
-      </div>
-    </div>
-    <div>
-     <div class="hero-visual">
-  <img src="img/BIM.jpg" alt="Edward kabuko portrait" style="width:100%;height:100%;object-fit:cover;">
-</div>
-      <div class="hero-meta" style="margin-top:1.4rem; flex-direction:row; gap:2rem;">
-        <div class="stat"><b>4+</b><span>Projects </span></div>
-        <div class="stat"><b>18</b><span>KENYAN BASED</span></div>
-        <div class="stat"><b>70%</b><span>Writing tips</span></div>
-      </div>
+  <div class="container">
+    <div class="eyebrow">F.00 — Civil Engineer / Designer / ML Engineer</div>
+    <h1>Hi, I'm Edward Kabuko, bridging physical structures with <span class="grad">intelligent digital frameworks</span>.</h1>
+    <p class="lede">Civil Engineering student at Meru University of Science and Technology with a deep drive for technology and layout design. I combine engineering domains with BIM styling, modern UI/UX workflows, and Machine Learning to build functional digital twins and interactive applications.</p>
+    <div class="hero-actions">
+      <a href="engineering.html" class="btn btn-primary">Explore Engineering</a>
+      <a href="contact.html" class="btn btn-ghost">Get In Touch</a>
     </div>
   </div>
 </header>
 
-<hr class="rule">
-
-<section class="tight">
+<!-- Categories Split Router Section -->
+<section style="padding-top: 0;">
   <div class="container">
-    <div class="eyebrow">Three ways in</div>
-    <h2>Pick your lane.</h2>
-  </div>
-  <div class="teasers container" style="padding:0;">
-    <a href="engineering.html" class="teaser eng">
-      <div><span class="num">01</span>
+    <div class="teasers">
+      <div class="teaser eng">
+        <span class="num">01 // STRUCTURAL</span>
         <h3>Engineering</h3>
-        <p style="color:var(--ink-soft); font-size:0.95rem;">Case studies, drawings, and the projects I've designed.</p>
+        <p>BIM design configurations, asset analytics data systems, and construction automation case files.</p>
+        <a href="engineering.html" class="tag">View Repository &rarr;</a>
       </div>
-      <div style="display:flex; justify-content:space-between; align-items:flex-end;">
-        <span class="tag">Case studies</span><span class="arrow">→</span>
-      </div>
-    </a>
-    <a href="photography.html" class="teaser photo">
-      <div><span class="num">02</span>
+      <div class="teaser photo">
+        <span class="num">02 // VISUAL</span>
         <h3>Photography</h3>
-        <p style="color:var(--ink-soft); font-size:0.95rem;">A grid-based gallery of landscape, street, and portrait work.</p>
+        <p>Capturing high-contrast architectural studies, landscape environments, and real-world framing perspective.</p>
+        <a href="photography.html" class="tag">View Gallery &rarr;</a>
       </div>
-      <div style="display:flex; justify-content:space-between; align-items:flex-end;">
-        <span class="tag">Gallery</span><span class="arrow">→</span>
+      <div class="teaser blog">
+        <span class="num">03 // INSIGHTS</span>
+        <h3>Notebook</h3>
+        <p>Documenting progress notes on machine learning applications, development experiments, and design guides.</p>
+        <a href="blog.html" class="tag">Read Articles &rarr;</a>
       </div>
-    </a>
-    <a href="blog.html" class="teaser blog">
-      <div><span class="num">03</span>
-        <h3>Blog &amp; tips</h3>
-        <p style="color:var(--ink-soft); font-size:0.95rem;">Practical engineering writing, tutorials, and downloadable resources.</p>
-      </div>
-      <div style="display:flex; justify-content:space-between; align-items:flex-end;">
-        <span class="tag">Read</span><span class="arrow">→</span>
-      </div>
-    </a>
+    </div>
   </div>
 </section>
 
-<hr class="rule">
-
-<section>
+<!-- Featured Core Projects Layout Grid -->
+<section style="border-top: 1px solid var(--line);">
   <div class="container">
     <div class="section-head">
-      <div>
-        <div class="eyebrow">Selected work</div>
-        <h2>A mix, on purpose.</h2>
-      </div>
-      <a href="engineering.html" class="btn btn-ghost">View all work</a>
+      <div class="eyebrow">Selected Work Cases</div>
+      <h2>Highlighted Systems</h2>
     </div>
+
     <div class="featured-strip">
+      <!-- Card 1: Automation -->
       <div class="feat-card">
-        <div class="feat-thumb hatch"><span class="ph-note">IMG</span></div>
+        <div class="feat-thumb hatch">
+          <img src="img/automation.jpg" alt="Digital Site Interface" style="width:100%; height:100%; object-fit:cover;">
+        </div>
         <div class="feat-body">
-          <span class="frame-tag">R.04 — Engineering</span>
-          <h4>Modular conveyor drive assembly</h4>
+          <span class="frame-tag">R.01 · Automation</span>
+          <h4><a href="engineering-project.html">Digital Site Infrastructure</a></h4>
+          <p>Analyzing automated concrete placement, mechanical material pathways, and smart production metrics across modern site installations.</p>
         </div>
       </div>
+
+      <!-- Card 2: Digital Twin -->
       <div class="feat-card">
-        <div class="feat-thumb hatch"><span class="ph-note">IMG</span></div>
+        <div class="feat-thumb hatch">
+          <img src="img/Digital.jpg" alt="Smart City Infrastructure Map" style="width:100%; height:100%; object-fit:cover;">
+        </div>
         <div class="feat-body">
-          <span class="frame-tag">F.11 — Photography</span>
-          <h4>Coastal fog, Big Sur series</h4>
+          <span class="frame-tag">R.02 · Smart Cities</span>
+          <h4><a href="engineering-project.html">Intelligent Urban Grid</a></h4>
+          <p>Mapping simulated IoT sensor frameworks to optimize distributed power lines and utility network models over municipal areas.</p>
         </div>
       </div>
+
+      <!-- Card 3: Product Design / Twin -->
       <div class="feat-card">
-        <div class="feat-thumb hatch"><span class="ph-note">IMG</span></div>
-        <div class="feat-body">
-          <span class="frame-tag">R.07 — Engineering</span>
-          <h4>Duplex designs, low rise</h4>
+        <div class="feat-thumb hatch">
+          <img src="img/Twin.jpg" alt="Digital Twin System Workspace" style="width:100%; height:100%; object-fit:cover;">
         </div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-thumb hatch"><span class="ph-note">IMG</span></div>
         <div class="feat-body">
-          <span class="frame-tag">F.22 — Photography</span>
-          <h4>Urban design and Smart cities</h4>
+          <span class="frame-tag">R.03 · Digital Twin</span>
+          <h4><a href="engineering-project.html">Industrial Process Mirror</a></h4>
+          <p>Aligning real-time monitoring streams with virtual structural geometry models to predict building system wear cycles dynamically.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<hr class="rule">
-
-<section class="tight">
-  <div class="container" style="display:flex; justify-content:space-between; align-items:center; gap:2rem; flex-wrap:wrap;">
-    <div>
-      <div class="eyebrow">Stay in the loop</div>
-      <h2 style="margin-bottom:0.3em;">Engineering tips, roughly monthly.</h2>
-      <p style="color:var(--ink-soft); max-width:480px; margin:0;">No spam, no fluff — one practical tutorial or resource per issue.</p>
-    </div>
-    <form class="newsletter-form" style="display:flex; gap:0.7rem; flex-wrap:wrap;">
-      <input class="field" style="width:260px;" type="email" placeholder="name@company.com" required>
-      <button type="submit" class="btn btn-primary">Subscribe</button>
-    </form>
-  </div>
-</section>
-
+<!-- Footnote Interface Block -->
 <footer>
   <div class="container">
-    <div class="foot-grid">
-      <div>
-        <a href="index.html" class="brand"><span class="dot"></span>E. Edwards</a>
-        <p style="color:var(--ink-soft); font-size:0.92rem; margin-top:1rem; max-width:280px;">Civil Engineer and Designer/ML Engineer. Available for consulting and select shoots.</p>
-      </div>
-      <div>
-        <h4>Site</h4>
-        <a href="about.html">About</a>
-        <a href="engineering.html">Engineering</a>
-        <a href="photography.html">Photography</a>
-        <a href="blog.html">Blog</a>
-      </div>
-      <div>
-        <h4>Elsewhere</h4>
-        <a href="#">linkedin @Edward kabuko</a>
-        <a href="#">Instagram @Edward kabuko</a>
-        <a href="#">Github @Edward kabuko</a>
-        <a href="#">500px</a>
-      </div>
-      <div>
-        <h4>Get in touch</h4>
-        <a href="contact.html">Contact form</a>
-        <a href="mailto:mbuguaedward427@gmail.com">mbuguaedward427@gmail.com</a>
-      </div>
-    </div>
     <div class="foot-bottom">
       <span>© 2026 Edward Kabuko. All rights reserved.</span>
-      <span>Built with intent —  Edward k.</span>
+      <a href="contact.html">Discuss a project</a>
     </div>
   </div>
 </footer>
 
 <script>
-// Mobile nav toggle
+// Handle responsive mobile navigation drawer toggle
 document.addEventListener('DOMContentLoaded', () => {
   const toggle = document.querySelector('.nav-toggle');
   const links = document.querySelector('.nav-links');
@@ -606,75 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
       links.classList.toggle('open');
     });
   }
-
-  // Generic filter chips (used on photography + engineering pages)
-  document.querySelectorAll('.filter-bar').forEach(bar => {
-    const chips = bar.querySelectorAll('.filter-chip');
-    const targetSelector = bar.dataset.target;
-    const items = targetSelector ? document.querySelectorAll(targetSelector) : [];
-    chips.forEach(chip => {
-      chip.addEventListener('click', () => {
-        chips.forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
-        const cat = chip.dataset.filter;
-        items.forEach(item => {
-          if (cat === 'all' || item.dataset.category === cat) {
-            item.style.display = '';
-          } else {
-            item.style.display = 'none';
-          }
-        });
-      });
-    });
-  });
-
-  // Lightbox for photography grid
-  const lightbox = document.getElementById('lightbox');
-  if (lightbox) {
-    const lbTitle = document.getElementById('lb-title');
-    const lbMeta = document.getElementById('lb-meta');
-    document.querySelectorAll('.masonry .m-item').forEach(item => {
-      item.addEventListener('click', () => {
-        lbTitle.textContent = item.dataset.title || 'Untitled';
-        lbMeta.textContent = item.dataset.meta || '';
-        lightbox.classList.add('open');
-      });
-    });
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox || e.target.closest('.lightbox-close')) {
-        lightbox.classList.remove('open');
-      }
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') lightbox.classList.remove('open');
-    });
-  }
-
-  // Contact form (front-end only stub — wire to Formspree/Netlify/etc. at launch)
-  const form = document.getElementById('contact-form');
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const btn = form.querySelector('button[type="submit"]');
-      btn.textContent = 'Message sent';
-      form.reset();
-      setTimeout(() => { btn.textContent = 'Send message'; }, 3000);
-    });
-  }
-
-  // Newsletter form stub
-  document.querySelectorAll('.newsletter-form').forEach(nf => {
-    nf.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const btn = nf.querySelector('button');
-      const original = btn.textContent;
-      btn.textContent = 'Subscribed';
-      nf.reset();
-      setTimeout(() => { btn.textContent = original; }, 2500);
-    });
-  });
 });
-
 </script>
 </body>
 </html>
