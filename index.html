@@ -67,21 +67,21 @@ button{font-family:inherit;cursor:pointer;}
 }
 
 /* ===================================================================
-   DYNAMIC ENERGIZED ANIMATIONS
+   REIMAGINED DATA STREAM BACKDROP GRAPHICS
 =================================================================== */
-.particle-layer {
+.stream-canvas-layer {
   position: fixed;
   inset: 0;
   z-index: -15;
   pointer-events: none;
-  opacity: 0.85;
+  opacity: 0.75;
 }
 
-@keyframes energeticEntrance {
+@keyframes physicalReveal {
   0% {
     opacity: 0;
-    transform: translateY(40px) rotateX(-15deg);
-    filter: blur(12px);
+    transform: translateY(35px) rotateX(-8deg);
+    filter: blur(8px);
   }
   100% {
     opacity: 1;
@@ -90,16 +90,16 @@ button{font-family:inherit;cursor:pointer;}
   }
 }
 
-.text-reveal-node {
+.hero-node {
   display: inline-block;
   opacity: 0;
-  transform-origin: left center;
-  animation: energeticEntrance 1.1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  transform-origin: left top;
+  animation: physicalReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.seq-1 { animation-delay: 0.05s; }
-.seq-2 { animation-delay: 0.2s; }
-.seq-3 { animation-delay: 0.35s; }
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.18s; }
+.stagger-3 { animation-delay: 0.32s; }
 
 /* ===================== TYPE ===================== */
 h1,h2,h3,h4{
@@ -109,7 +109,7 @@ h1,h2,h3,h4{
   margin:0 0 0.6em;
   color:var(--ink);
 }
-h1{font-size:clamp(2.6rem, 5vw, 4.5rem); line-height:1.05; letter-spacing:-0.02em; perspective: 1000px;}
+h1{font-size:clamp(2.6rem, 5vw, 4.5rem); line-height:1.05; letter-spacing:-0.02em; perspective: 1200px;}
 h2{font-size:clamp(1.7rem, 3.4vw, 2.6rem); line-height:1.1;}
 h3{font-size:1.3rem;}
 p{margin:0 0 1.1em;}
@@ -270,8 +270,8 @@ body::before{
 </head>
 <body>
 
-<!-- High-Energy Ambient Motion Layer -->
-<canvas class="particle-layer" id="energeticSpace"></canvas>
+<!-- Reimagined Cinematic Data-Flow Canvas -->
+<canvas class="stream-canvas-layer" id="matrixDataStream"></canvas>
 
 <div class="grid-bg"></div>
 <div class="glow-field"><div class="glow glow-a"></div><div class="glow glow-b"></div></div>
@@ -297,9 +297,9 @@ body::before{
   <div class="container">
     <div class="eyebrow">F.00 — Civil Engineer / Designer / ML Engineer</div>
     <h1>
-      <span class="text-reveal-node seq-1">Hi, I'm Edward Kabuko,</span> <br>
-      <span class="text-reveal-node seq-2">bridging physical structures with</span> <br>
-      <span class="text-reveal-node seq-3"><span class="grad">intelligent digital frameworks</span>.</span>
+      <span class="hero-node stagger-1">Hi, I'm Edward Kabuko,</span> <br>
+      <span class="hero-node stagger-2">bridging physical structures with</span> <br>
+      <span class="hero-node stagger-3"><span class="grad">intelligent digital frameworks</span>.</span>
     </h1>
     <p class="lede">Civil Engineering student at Meru University of Science and Technology with a deep drive for technology and layout design. I combine engineering domains with BIM styling, modern UI/UX workflows, and Machine Learning to build functional digital twins and interactive applications.</p>
     <div class="hero-actions">
@@ -405,63 +405,76 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// High-Energy Ambient Star/Particle Field Driver
+// Advanced Interactive Horizontal Data Stream Infrastructure
 document.addEventListener('DOMContentLoaded', () => {
-  const canvas = document.getElementById('energeticSpace');
+  const canvas = document.getElementById('matrixDataStream');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
-  let particles = [];
-  const baseCount = 65; 
+  let streams = [];
+  const trackCount = 28; // Discrete horizontal node rows
 
-  function initDimensions() {
+  function setupCanvasSize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   }
-  window.addEventListener('resize', initDimensions);
-  initDimensions();
+  window.addEventListener('resize', setupCanvasSize);
+  setupCanvasSize();
 
-  // Populate field array
-  for (let i = 0; i < baseCount; i++) {
-    particles.push({
+  // Construct structured rows of streaming visual packets
+  for (let i = 0; i < trackCount; i++) {
+    const rowY = (canvas.height / trackCount) * i + (Math.random() * 15);
+    const streamVelocity = Math.random() * 1.4 + 0.4;
+    const streamLength = Math.floor(Math.random() * 8) + 4;
+    
+    streams.push({
+      y: rowY,
       x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      size: Math.random() * 2.2 + 0.4,
-      vectorX: (Math.random() - 0.5) * 0.45,
-      vectorY: (Math.random() - 0.5) * 0.45,
-      alphaFactor: Math.random() * 0.6 + 0.15,
-      fluxSpeed: Math.random() * 0.02 + 0.005,
-      fluxStep: Math.random() * Math.PI
+      speed: streamVelocity,
+      size: Math.random() * 1.8 + 0.6,
+      length: streamLength,
+      pulseSeed: Math.random() * Math.PI
     });
   }
 
-  function loop() {
+  function renderDataLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    particles.forEach(p => {
-      // Dynamic velocity displacement
-      p.x += p.vectorX;
-      p.y += p.vectorY;
-      p.fluxStep += p.fluxSpeed;
+    streams.forEach(s => {
+      // Progress position coordinates horizontally
+      s.x += s.speed;
+      s.pulseSeed += 0.01;
 
-      // Clean viewport edge recycling loop
-      if (p.x < 0) p.x = canvas.width;
-      if (p.x > canvas.width) p.x = 0;
-      if (p.y < 0) p.y = canvas.height;
-      if (p.y > canvas.height) p.y = 0;
+      // Loop around browser boundaries smoothly
+      if (s.x > canvas.width) {
+        s.x = -150;
+      }
 
-      // High-aesthetic glow intensity modulation
-      const dynamicAlpha = p.alphaFactor + Math.sin(p.fluxStep) * 0.12;
+      // Draw standard engineering packet nodes trailing each other
+      for (let j = 0; j < s.length; j++) {
+        const trailingX = s.x - (j * 14);
+        if (trailingX < 0 || trailingX > canvas.width) continue;
 
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(185, 162, 255, ${Math.max(0.05, Math.min(1, dynamicAlpha))})`;
-      ctx.fill();
+        // Mathematical alpha fall-off for trailing stream aesthetics
+        const trailingAlpha = (1 - (j / s.length)) * (0.18 + Math.sin(s.pulseSeed) * 0.08);
+
+        ctx.beginPath();
+        // Alternating square bits and traditional circles to simulate raw data
+        if (j % 3 === 0) {
+          ctx.rect(trailingX, s.y, s.size * 1.5, s.size * 1.5);
+        } else {
+          ctx.arc(trailingX, s.y, s.size, 0, Math.PI * 2);
+        }
+
+        // Apply a premium, soft glow mapping directly to your --blue-deep token palette
+        ctx.fillStyle = `rgba(185, 162, 255, ${Math.max(0, Math.min(1, trailingAlpha))})`;
+        ctx.fill();
+      }
     });
 
-    requestAnimationFrame(loop);
+    requestAnimationFrame(renderDataLoop);
   }
-  loop();
+  renderDataLoop();
 });
 </script>
 </body>
